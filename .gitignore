@@ -1,0 +1,21 @@
+# Ambientes virtuais e Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Variáveis de ambiente e segredos
+.env
+*.pem
+*.key
+
+# Base de dados local RAG
+chroma_db/
+
+# Relatórios e artefactos de teste
+test-results/
+playwright-report/
+junit.xml
+results.xml
