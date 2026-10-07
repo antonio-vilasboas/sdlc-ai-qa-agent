@@ -1,0 +1,126 @@
+[
+  {
+    "id": "us-01",
+    "summary": "Autenticação de utilizador com credenciais válidas",
+    "priority": "High",
+    "labels": ["ai-qa", "login"],
+    "story": {
+      "como": "cliente registado da loja Swag Labs",
+      "quero": "autenticar-me com as minhas credenciais",
+      "para": "aceder ao catálogo de produtos e iniciar uma compra"
+    },
+    "context": "A página de login é o ponto de entrada único da aplicação. Nenhuma página interna é acessível sem sessão iniciada.",
+    "acceptance_criteria": [
+      "Dado que estou na página de login, quando introduzo um utilizador válido e a respetiva password e submeto o formulário, então sou redirecionado para a página de catálogo de produtos.",
+      "Na página de catálogo, o título da secção de produtos é visível.",
+      "Na página de catálogo, é apresentada a lista de produtos disponíveis."
+    ],
+    "notes": [
+      "Credenciais de teste e regras de autenticação: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence."
+    ]
+  },
+  {
+    "id": "us-02",
+    "summary": "Bloqueio de acesso a utilizador com conta bloqueada",
+    "priority": "High",
+    "labels": ["ai-qa", "login", "negativo"],
+    "story": {
+      "como": "responsável pela segurança da loja Swag Labs",
+      "quero": "impedir a autenticação de contas bloqueadas",
+      "para": "garantir que apenas utilizadores autorizados acedem à loja"
+    },
+    "context": "A loja mantém contas que foram bloqueadas administrativamente. Estas contas continuam a existir, mas não podem iniciar sessão.",
+    "acceptance_criteria": [
+      "Dado que estou na página de login, quando introduzo as credenciais de uma conta bloqueada e submeto o formulário, então o acesso é recusado e permaneço na página de login.",
+      "É apresentada uma mensagem de erro a indicar que a conta se encontra bloqueada.",
+      "O utilizador consegue fechar a mensagem de erro apresentada."
+    ],
+    "notes": [
+      "Utilizador bloqueado de teste e texto exato da mensagem de erro: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence."
+    ]
+  },
+  {
+    "id": "us-03",
+    "summary": "Validação de campos obrigatórios no formulário de login",
+    "priority": "Medium",
+    "labels": ["ai-qa", "login", "validacao"],
+    "story": {
+      "como": "cliente da loja Swag Labs",
+      "quero": "ser informado quando não preencho os campos obrigatórios do login",
+      "para": "perceber de imediato o que falta para conseguir entrar"
+    },
+    "context": "O formulário de login tem dois campos obrigatórios: utilizador e password. A validação é feita ao submeter o formulário.",
+    "acceptance_criteria": [
+      "Dado que estou na página de login, quando submeto o formulário sem preencher nenhum campo, então é apresentada uma mensagem de erro a indicar que o utilizador é obrigatório.",
+      "Dado que preencho apenas o utilizador, quando submeto o formulário, então é apresentada uma mensagem de erro a indicar que a password é obrigatória.",
+      "Em ambos os casos, permaneço na página de login."
+    ],
+    "notes": [
+      "Textos exatos das mensagens de validação: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence."
+    ]
+  },
+  {
+    "id": "us-04",
+    "summary": "Ordenação de produtos no catálogo",
+    "priority": "Medium",
+    "labels": ["ai-qa", "catalogo"],
+    "story": {
+      "como": "cliente autenticado da loja Swag Labs",
+      "quero": "ordenar os produtos do catálogo por nome ou por preço",
+      "para": "encontrar mais rapidamente o produto que procuro"
+    },
+    "context": "O catálogo apresenta seis produtos e disponibiliza um seletor de ordenação com quatro opções: nome ascendente, nome descendente, preço ascendente e preço descendente.",
+    "acceptance_criteria": [
+      "Dado que estou autenticado na página de catálogo, quando escolho a ordenação por preço ascendente, então os produtos são apresentados do mais barato para o mais caro.",
+      "Quando escolho a ordenação por preço descendente, então os produtos são apresentados do mais caro para o mais barato.",
+      "Quando escolho a ordenação por nome descendente (Z a A), então os produtos são apresentados por ordem alfabética inversa."
+    ],
+    "notes": [
+      "Opções do seletor de ordenação e ordem por omissão: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence."
+    ]
+  },
+  {
+    "id": "us-05",
+    "summary": "Gestão de artigos no carrinho de compras",
+    "priority": "High",
+    "labels": ["ai-qa", "carrinho"],
+    "story": {
+      "como": "cliente autenticado da loja Swag Labs",
+      "quero": "adicionar e remover artigos do carrinho",
+      "para": "preparar a minha encomenda antes de finalizar a compra"
+    },
+    "context": "O cabeçalho da aplicação apresenta um ícone de carrinho com um contador do número de artigos adicionados. O contador não é apresentado quando o carrinho está vazio.",
+    "acceptance_criteria": [
+      "Dado que estou autenticado na página de catálogo, quando adiciono um produto ao carrinho, então o contador do carrinho passa a indicar 1.",
+      "Quando adiciono um segundo produto, então o contador passa a indicar 2.",
+      "Ao abrir o carrinho, são apresentados os dois produtos adicionados.",
+      "Quando removo um dos produtos no carrinho, então esse produto deixa de ser apresentado e o contador passa a indicar 1."
+    ],
+    "notes": [
+      "Nomes dos produtos disponíveis e comportamento do contador: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence."
+    ]
+  },
+  {
+    "id": "us-06",
+    "summary": "[E2E] Finalização de encomenda (checkout completo)",
+    "priority": "Highest",
+    "labels": ["ai-qa", "checkout", "e2e"],
+    "story": {
+      "como": "cliente da loja Swag Labs",
+      "quero": "concluir uma compra desde o login até à confirmação da encomenda",
+      "para": "receber os produtos que escolhi"
+    },
+    "context": "O checkout decorre em três passos: informação do cliente, resumo da encomenda e confirmação. Os três campos de informação do cliente são obrigatórios.",
+    "acceptance_criteria": [
+      "Dado que estou autenticado com um utilizador válido, quando adiciono um produto ao carrinho, abro o carrinho e inicio o checkout, então é apresentado o formulário de informação do cliente.",
+      "Quando preencho nome, apelido e código postal e continuo, então é apresentado o resumo da encomenda com o produto escolhido.",
+      "O resumo apresenta o subtotal, a taxa e o total, sendo o total igual à soma do subtotal com a taxa.",
+      "Quando finalizo a encomenda, então é apresentada a mensagem de confirmação da encomenda.",
+      "Dado que estou no formulário de informação do cliente, quando continuo sem preencher o código postal, então é apresentada uma mensagem de erro e não avanço para o resumo."
+    ],
+    "notes": [
+      "Regras de cálculo da taxa, textos de confirmação e de erro: ver página \"Swag Labs – Base de Conhecimento QA\" no Confluence.",
+      "Fluxo ponta a ponta: depende das funcionalidades descritas em US-01 e US-05."
+    ]
+  }
+]
