@@ -30,6 +30,11 @@ class Section:
     url_path: str | None = None
 
     @property
+    def is_traceability(self) -> bool:
+        """Secção de rastreabilidade: gabarito da avaliação, nunca entregue aos agentes."""
+        return "Rastreabilidade" in self.title
+
+    @property
     def chunk_id(self) -> str:
         return f"kb-s{self.number:02d}"
 
@@ -138,7 +143,7 @@ def parse_storage(xhtml: str) -> list[Section]:
 
 def traceability(sections: list[Section]) -> dict[str, set[int]]:
     """Lê a secção de rastreabilidade: {"QAAGENT-1": {1, 2, 3}, ...}."""
-    trace = next((s for s in sections if "Rastreabilidade" in s.title), None)
+    trace = next((s for s in sections if s.is_traceability), None)
     if trace is None:
         raise ValueError("secção de rastreabilidade não encontrada")
     mapping: dict[str, set[int]] = {}

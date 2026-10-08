@@ -40,6 +40,7 @@ class KnowledgeStore:
         self._collection_name = collection
         self.model_name = model_name
         self._model: SentenceTransformer | None = None
+        self._coll: chromadb.Collection | None = None
 
     # -- embeddings -------------------------------------------------------------
     @property
@@ -56,17 +57,20 @@ class KnowledgeStore:
 
     # -- coleção ----------------------------------------------------------------
     def _collection(self) -> chromadb.Collection:
-        return self._client.get_or_create_collection(
-            name=self._collection_name,
-            metadata={"hnsw:space": "cosine"},
-            embedding_function=None,
-        )
+        if self._coll is None:
+            self._coll = self._client.get_or_create_collection(
+                name=self._collection_name,
+                metadata={"hnsw:space": "cosine"},
+                embedding_function=None,
+            )
+        return self._coll
 
     def rebuild(self, sections: list[Section], source: dict[str, str | int]) -> int:
         """Recria a coleção a partir das secções (operação idempotente). Devolve o n.º de blocos."""
         existing = [getattr(c, "name", c) for c in self._client.list_collections()]
         if self._collection_name in existing:
             self._client.delete_collection(self._collection_name)
+        self._coll = None
         collection = self._collection()
         collection.add(
             ids=[s.chunk_id for s in sections],
@@ -86,25 +90,38 @@ class KnowledgeStore:
         )
         return collection.count()
 
-    def query(self, text: str, k: int = 3) -> list[Hit]:
+    def query(self, text: str, k: int = 5, exclude_sections: tuple[int, ...] = ()) -> list[Hit]:
+        """Pesquisa semântica. `exclude_sections` retira secções do ranking (ex.: a secção 0,
+        que é sempre incluída no contexto por get_section)."""
         collection = self._collection()
         if collection.count() == 0:
             raise RuntimeError("índice vazio: executar a ingestão primeiro")
+        where = {"section_number": {"$nin": list(exclude_sections)}} if exclude_sections else None
         res = collection.query(
             query_embeddings=self._embed([text], "query: "),
-            n_results=min(k, collection.count()),
+            n_results=min(k, collection.count() - len(exclude_sections)),
+            where=where,
             include=["documents", "metadatas", "distances"],
         )
-        hits: list[Hit] = []
-        for cid, doc, meta, dist in zip(res["ids"][0], res["documents"][0], res["metadatas"][0], res["distances"][0]):
-            hits.append(
-                Hit(
-                    chunk_id=cid,
-                    section_number=int(meta["section_number"]),
-                    section_title=str(meta["section_title"]),
-                    score=round(1.0 - float(dist), 4),
-                    content=doc,
-                    metadata=dict(meta),
-                )
-            )
-        return hits
+        return [
+            self._hit(cid, doc, meta, 1.0 - float(dist))
+            for cid, doc, meta, dist in zip(res["ids"][0], res["documents"][0], res["metadatas"][0], res["distances"][0])
+        ]
+
+    def get_section(self, number: int) -> Hit:
+        """Obtém uma secção pelo número (sem pesquisa)."""
+        res = self._collection().get(where={"section_number": number}, include=["documents", "metadatas"])
+        if not res["ids"]:
+            raise KeyError(f"secção {number} não indexada")
+        return self._hit(res["ids"][0], res["documents"][0], res["metadatas"][0], 1.0)
+
+    @staticmethod
+    def _hit(cid: str, doc: str, meta: Any, score: float) -> Hit:
+        return Hit(
+            chunk_id=cid,
+            section_number=int(meta["section_number"]),
+            section_title=str(meta["section_title"]),
+            score=round(score, 4),
+            content=doc,
+            metadata=dict(meta),
+        )

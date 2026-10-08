@@ -8,6 +8,12 @@ Passos:
      o índice e compara as secções devolvidas com as esperadas na secção de
      rastreabilidade da própria página (gabarito). Métricas: Recall@k e Hit@k.
 
+Regras de indexação:
+  - a secção de rastreabilidade (gabarito) NÃO é indexada, para não chegar aos agentes
+    e contaminar a métrica de conformidade (AR);
+  - a secção 0 (Âmbito e Convenções) é indexada mas excluída do ranking: é sempre
+    acrescentada ao contexto do agente. A avaliação incide, por isso, sobre as secções 1–9.
+
 O resultado da avaliação é guardado em knowledge/rag_retrieval_eval.json.
 
 Uso:
@@ -41,6 +47,7 @@ CHROMA_PATH = ROOT / "chroma_db"
 STORIES_FILE = ROOT / "requirements" / "user_stories.json"
 EVAL_OUT = ROOT / "knowledge" / "rag_retrieval_eval.json"
 K_VALUES = (3, 5)
+ALWAYS_INCLUDED = (0,)  # secções sempre presentes no contexto (fora do ranking)
 
 
 def story_query(story: dict[str, Any]) -> str:
@@ -61,8 +68,9 @@ def evaluate(store: KnowledgeStore, expected: dict[str, set[int]]) -> dict[str, 
         gold = expected.get(key)
         if gold is None:
             raise ValueError(f"{key} sem secções esperadas na rastreabilidade")
+        gold = gold - set(ALWAYS_INCLUDED)
         t0 = time.perf_counter()
-        hits = store.query(story_query(story), k=k_max)
+        hits = store.query(story_query(story), k=k_max, exclude_sections=ALWAYS_INCLUDED)
         latency_ms = int((time.perf_counter() - t0) * 1000)
         retrieved = [h.section_number for h in hits]
         row: dict[str, Any] = {
@@ -84,7 +92,7 @@ def evaluate(store: KnowledgeStore, expected: dict[str, set[int]]) -> dict[str, 
 
 
 def print_report(result: dict[str, Any]) -> None:
-    print("\nAvaliação da recuperação (gabarito: secção de rastreabilidade da página)")
+    print("\nAvaliação da recuperação sobre as secções 1–9 (gabarito: rastreabilidade da página)")
     print(f"{'Story':<11} {'Esperadas':<18} {'Top-5 devolvidas (secção:score)':<52} R@3   R@5")
     for r in result["per_story"]:
         top = " ".join(f"{x['section']}:{x['score']:.2f}" for x in r["retrieved"])
@@ -97,13 +105,14 @@ def print_report(result: dict[str, Any]) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Ingestão da base de conhecimento no ChromaDB.")
     parser.add_argument("--query", help="só pesquisa o índice existente (não reindexa)")
-    parser.add_argument("-k", type=int, default=3, help="n.º de secções a devolver com --query")
+    parser.add_argument("-k", type=int, default=5, help="n.º de secções a devolver com --query")
     args = parser.parse_args(argv)
 
     store = KnowledgeStore(CHROMA_PATH)
 
     if args.query:
-        for h in store.query(args.query, k=args.k):
+        print(f"[sempre] {store.get_section(0).section_title}")
+        for h in store.query(args.query, k=args.k, exclude_sections=ALWAYS_INCLUDED):
             print(f"[{h.score:.3f}] {h.section_title}")
         return 0
 
@@ -121,11 +130,13 @@ def main(argv: list[str] | None = None) -> int:
     except (ConfluenceSourceError, requests.RequestException, ValueError) as exc:
         print(f"❌ {exc}")
         return 1
-    print(f"  ✅ página {page.page_id} (versão {page.version}) · {len(sections)} secções")
+    indexed = [s for s in sections if not s.is_traceability]
+    print(f"  ✅ página {page.page_id} (versão {page.version}) · {len(sections)} secções "
+          f"({len(indexed)} a indexar; rastreabilidade reservada para avaliação)")
 
     print(f"→ 2/3 A indexar no ChromaDB ({store.model_name})")
     t0 = time.perf_counter()
-    count = store.rebuild(sections, {"page_id": page.page_id, "page_version": page.version, "page_url": page.web_url})
+    count = store.rebuild(indexed, {"page_id": page.page_id, "page_version": page.version, "page_url": page.web_url})
     print(f"  ✅ {count} blocos indexados em {time.perf_counter() - t0:.1f} s → {CHROMA_PATH.name}/")
 
     print("→ 3/3 A avaliar a recuperação com as 6 User Stories")
@@ -138,6 +149,7 @@ def main(argv: list[str] | None = None) -> int:
                 "evaluated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "embedding_model": store.model_name,
                 "chunking": "uma secção (H2) por bloco",
+                "indexing_rules": "secção de rastreabilidade não indexada; secção 0 sempre incluída e fora do ranking",
                 "page": {"id": page.page_id, "version": page.version},
                 **result,
             },
