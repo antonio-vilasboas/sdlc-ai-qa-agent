@@ -31,10 +31,13 @@ Regras obrigatórias:
 3. Em cada cenário indica as regras de negócio (IDs RN-...) do contexto que o cenário verifica.
    Usa apenas IDs que aparecem no contexto.
 4. Escreve os passos em linguagem de negócio, em português. Não incluas seletores, código
-   nem nomes de atributos técnicos.
-5. Em test_data coloca os dados concretos necessários, copiados do contexto (utilizador,
-   password, textos exatos esperados, valores).
-6. Se faltar informação para especificar um cenário, regista-a em gaps em vez de inventar.
+   nem nomes de atributos técnicos (ex.: valores data-test, ids, classes CSS) — nem nos
+   passos nem em test_data. A tradução para elementos da página é feita por outro agente.
+5. Em test_data coloca apenas dados de negócio concretos, copiados do contexto (utilizador,
+   password, textos exatos esperados, valores, URL de destino).
+6. Em gaps regista apenas comportamentos da aplicação relevantes para os cenários que não
+   estão especificados na User Story nem no contexto. Não comentes o processo de análise
+   nem a origem da informação.
 
 Responde APENAS com um objeto JSON válido, sem texto antes ou depois, conforme este esquema:
 {schema}"""
