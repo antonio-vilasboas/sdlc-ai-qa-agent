@@ -115,6 +115,12 @@ class KnowledgeStore:
             raise KeyError(f"secção {number} não indexada")
         return self._hit(res["ids"][0], res["documents"][0], res["metadatas"][0], 1.0)
 
+    def all_sections(self) -> list[Hit]:
+        """Todas as secções indexadas, por ordem (usado pelo Validador para a lista de seletores)."""
+        res = self._collection().get(include=["documents", "metadatas"])
+        hits = [self._hit(c, d, m, 1.0) for c, d, m in zip(res["ids"], res["documents"], res["metadatas"])]
+        return sorted(hits, key=lambda h: h.section_number)
+
     @staticmethod
     def _hit(cid: str, doc: str, meta: Any, score: float) -> Hit:
         return Hit(
