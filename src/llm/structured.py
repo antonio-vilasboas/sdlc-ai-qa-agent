@@ -41,6 +41,7 @@ class CallMetrics:
     latency_ms: int = 0
     cost_usd: float | None = 0.0
     errors: list[str] = field(default_factory=list)
+    finish_reasons: list[str] = field(default_factory=list)  # "stop" = completa; "length" = truncada
 
     def add(self, prompt: int, completion: int, latency_ms: int, cost: float | None) -> None:
         self.attempts += 1
@@ -92,12 +93,23 @@ def call_structured(
             cost = None
         metrics.add(response.usage.prompt_tokens, response.usage.completion_tokens, latency, cost)
 
-        raw = response.choices[0].message.content or ""
-        try:
-            value = schema.model_validate_json(_extract_json(raw))
-            problems = extra_check(value) if extra_check else []
-        except (ValueError, ValidationError) as exc:
-            problems = [str(exc)[:1500]]
+        choice = response.choices[0]
+        finish = str(getattr(choice, "finish_reason", "") or "")
+        metrics.finish_reasons.append(finish)
+        raw = choice.message.content or ""
+        if finish == "length":
+            # Resposta cortada pelo limite de tokens: o JSON fica incompleto. Pede-se uma versão
+            # mais compacta em vez de reportar um erro de sintaxe enganador.
+            problems = [
+                f"a resposta foi truncada ao atingir o limite de {max_tokens} tokens; "
+                "devolve o objeto JSON completo de forma mais compacta (sem texto nem comentários supérfluos)"
+            ]
+        else:
+            try:
+                value = schema.model_validate_json(_extract_json(raw))
+                problems = extra_check(value) if extra_check else []
+            except (ValueError, ValidationError) as exc:
+                problems = [str(exc)[:1500]]
         if not problems:
             return StructuredResult(value=value, metrics=metrics)
 

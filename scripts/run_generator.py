@@ -85,7 +85,7 @@ def main(argv: list[str] | None = None) -> int:
     if not temperature_supported(cfg.llm_model):
         print("     nota: o modelo não aceita temperature=0; usada a amostragem por omissão")
     if m.errors:
-        print(f"     correções pedidas ao modelo: {len(m.errors)}")
+        print(f"     correções pedidas ao modelo: {len(m.errors)} · fim de cada tentativa {m.finish_reasons}")
     print("\n  Pesquisa por passo (passo → secções):")
     for step, sections in ctx.step_retrieval.items():
         print(f"     {sections}  {step}")
@@ -114,6 +114,7 @@ def main(argv: list[str] | None = None) -> int:
                     "completion_tokens": m.completion_tokens,
                     "latency_ms": m.latency_ms,
                     "cost_usd": m.cost_usd,
+                    "finish_reasons": m.finish_reasons,
                     "correction_requests": m.errors,
                 },
                 "suite": suite.model_dump(),

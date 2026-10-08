@@ -29,7 +29,7 @@ STEP_K = 2  # secções recuperadas por passo
 ALWAYS_INCLUDED = (0,)
 BASE_URL = "https://www.saucedemo.com"
 
-MODULE_HEADER = '''"""Testes E2E gerados automaticamente pelo Agente Gerador — {key}: {title}
+MODULE_HEADER = '''"""Testes E2E gerados automaticamente pelo Agente Gerador — {heading}
 
 Não editar à mão: regenerar com `python scripts/run_generator.py {key}`.
 """
@@ -170,7 +170,8 @@ def _check_function(scenario_id: str, name: str, code: str) -> list[str]:
 
 def assemble_module(suite: GeneratedSuite, title: str) -> str:
     """Módulo pytest final: cabeçalho fixo + funções pela ordem dos cenários."""
-    header = MODULE_HEADER.format(key=suite.story_key, title=title, base_url=BASE_URL)
+    heading = suite.story_key if title in ("", suite.story_key) else f"{suite.story_key}: {title}"
+    header = MODULE_HEADER.format(heading=heading, key=suite.story_key, base_url=BASE_URL)
     functions = [t.code.strip("\n") for t in sorted(suite.tests, key=lambda t: t.scenario_id)]
     return header + "\n\n" + "\n\n\n".join(functions) + "\n"
 
@@ -196,6 +197,6 @@ def generate(
         ),
         schema=GeneratedSuite,
         extra_check=_checker(spec),
-        max_tokens=8000,
+        max_tokens=16000,  # 8000 truncou o QAAGENT-6 (5 testes) na 1.ª execução
     )
     return GeneratorResult(suite=result.value, context=context, metrics=result.metrics)
