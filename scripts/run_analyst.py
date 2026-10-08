@@ -90,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
         json.dumps(
             {
                 "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "story_summary": story.summary,
                 "model": cfg.llm_model,
                 "temperature": 0 if temperature_supported(cfg.llm_model) else "omissão do modelo",
                 "context_sections": result.context_sections,
