@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT))
 from scripts.sanity_check import build_session, load_settings  # noqa: E402
 from src.agents.analyst import analyse  # noqa: E402
 from src.integrations.jira_reader import JiraReadError, fetch_story  # noqa: E402
-from src.llm.structured import LLMOutputError  # noqa: E402
+from src.llm.structured import LLMOutputError, temperature_supported  # noqa: E402
 from src.rag.vector_store import KnowledgeStore  # noqa: E402
 
 CHROMA_PATH = ROOT / "chroma_db"
@@ -65,6 +65,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  ✅ {len(spec.scenarios)} cenários · secções usadas {result.context_sections}")
     print(f"     tentativas {m.attempts} · tokens {m.prompt_tokens}/{m.completion_tokens} · "
           f"{m.latency_ms / 1000:.1f} s · custo {'n/d' if m.cost_usd is None else f'${m.cost_usd:.4f}'}")
+    if not temperature_supported(cfg.llm_model):
+        print("     nota: o modelo não aceita temperature=0; usada a amostragem por omissão")
     if m.errors:
         print(f"     correções pedidas ao modelo: {len(m.errors)}")
 
@@ -89,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
             {
                 "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "model": cfg.llm_model,
+                "temperature": 0 if temperature_supported(cfg.llm_model) else "omissão do modelo",
                 "context_sections": result.context_sections,
                 "metrics": {
                     "attempts": m.attempts,

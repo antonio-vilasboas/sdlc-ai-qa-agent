@@ -20,6 +20,12 @@ from pydantic import BaseModel, ValidationError
 
 T = TypeVar("T", bound=BaseModel)
 
+litellm.suppress_debug_info = True  # sem mensagens "Give Feedback / Get Help" no terminal
+
+# Modelos que rejeitam o parâmetro temperature (ex.: gerações recentes do Claude).
+# Preenchido automaticamente à primeira rejeição, para não repetir o erro.
+_NO_TEMPERATURE: set[str] = set()
+
 _JSON_BLOCK = re.compile(r"\{.*\}", re.S)
 
 
@@ -78,15 +84,7 @@ def call_structured(
 
     for _ in range(max_attempts):
         t0 = time.perf_counter()
-        response = litellm.completion(
-            model=model,
-            api_key=api_key,
-            messages=messages,
-            temperature=0,
-            max_tokens=max_tokens,
-            num_retries=2,
-            timeout=120,
-        )
+        response = _complete(model=model, api_key=api_key, messages=messages, max_tokens=max_tokens)
         latency = int((time.perf_counter() - t0) * 1000)
         try:
             cost: float | None = float(litellm.completion_cost(completion_response=response))
@@ -114,6 +112,27 @@ def call_structured(
         ]
 
     raise LLMOutputError(f"resposta inválida após {max_attempts} tentativas: {metrics.errors[-3:]}")
+
+
+def _complete(*, model: str, api_key: str, messages: list[dict[str, str]], max_tokens: int):  # type: ignore[no-untyped-def]
+    """Pedido ao modelo com temperature=0 (respostas o mais deterministas possível).
+
+    Se o modelo rejeitar o parâmetro, repete sem ele e memoriza a rejeição.
+    Repetições automáticas apenas para erros transitórios (limite de pedidos, servidor).
+    """
+    kwargs = {"model": model, "api_key": api_key, "messages": messages, "max_tokens": max_tokens, "timeout": 120}
+    if model not in _NO_TEMPERATURE:
+        try:
+            return litellm.completion(**kwargs, temperature=0, num_retries=0)
+        except litellm.BadRequestError as exc:
+            if "temperature" not in str(exc):
+                raise
+            _NO_TEMPERATURE.add(model)
+    return litellm.completion(**kwargs, num_retries=2)
+
+
+def temperature_supported(model: str) -> bool:
+    return model not in _NO_TEMPERATURE
 
 
 def schema_hint(schema: type[BaseModel]) -> str:
