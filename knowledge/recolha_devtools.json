@@ -1,0 +1,3427 @@
+{
+    "login_vazio": {
+        "url": "/",
+        "elementos": [
+            [
+                "div",
+                "login-container",
+                "Epic sadface: Username is required Accepted usernames are: standard_user locked_out_user problem_use"
+            ],
+            [
+                "input",
+                "username",
+                ""
+            ],
+            [
+                "input",
+                "password",
+                ""
+            ],
+            [
+                "h3",
+                "error",
+                "Epic sadface: Username is required"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "input",
+                "login-button",
+                "Login"
+            ],
+            [
+                "div",
+                "login-credentials-container",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-credentials",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-password",
+                "Password for all users: secret_sauce"
+            ]
+        ]
+    },
+    "login_sem_password": {
+        "url": "/",
+        "elementos": [
+            [
+                "div",
+                "login-container",
+                "Epic sadface: Password is required Accepted usernames are: standard_user locked_out_user problem_use"
+            ],
+            [
+                "input",
+                "username",
+                "standard_user"
+            ],
+            [
+                "input",
+                "password",
+                ""
+            ],
+            [
+                "h3",
+                "error",
+                "Epic sadface: Password is required"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "input",
+                "login-button",
+                "Login"
+            ],
+            [
+                "div",
+                "login-credentials-container",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-credentials",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-password",
+                "Password for all users: secret_sauce"
+            ]
+        ]
+    },
+    "login_errado": {
+        "url": "/",
+        "elementos": [
+            [
+                "div",
+                "login-container",
+                "Epic sadface: Username and password do not match any user in this service Accepted usernames are: st"
+            ],
+            [
+                "input",
+                "username",
+                "standard_user"
+            ],
+            [
+                "input",
+                "password",
+                "qweqw"
+            ],
+            [
+                "h3",
+                "error",
+                "Epic sadface: Username and password do not match any user in this service"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "input",
+                "login-button",
+                "Login"
+            ],
+            [
+                "div",
+                "login-credentials-container",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-credentials",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-password",
+                "Password for all users: secret_sauce"
+            ]
+        ]
+    },
+    "login_bloqueado": {
+        "url": "/",
+        "elementos": [
+            [
+                "div",
+                "login-container",
+                "Epic sadface: Sorry, this user has been locked out. Accepted usernames are: standard_user locked_out"
+            ],
+            [
+                "input",
+                "username",
+                "locked_out_user"
+            ],
+            [
+                "input",
+                "password",
+                "secret_sauce"
+            ],
+            [
+                "h3",
+                "error",
+                "Epic sadface: Sorry, this user has been locked out."
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "input",
+                "login-button",
+                "Login"
+            ],
+            [
+                "div",
+                "login-credentials-container",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-credentials",
+                "Accepted usernames are: standard_user locked_out_user problem_user performance_glitch_user error_use"
+            ],
+            [
+                "div",
+                "login-password",
+                "Password for all users: secret_sauce"
+            ]
+        ]
+    },
+    "catalogo": {
+        "url": "/inventory.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "span",
+                "title",
+                "Products"
+            ],
+            [
+                "span",
+                "active-option",
+                "Name (A to Z)"
+            ],
+            [
+                "select",
+                "product-sort-container",
+                "az=Name (A to Z) | za=Name (Z to A) | lohi=Price (low to high) | hilo=Price (high to low)"
+            ],
+            [
+                "div",
+                "inventory-container",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "div",
+                "inventory-list",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-backpack-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-backpack",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bike-light-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bike-light",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bolt-t-shirt-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-title-link",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bolt-t-shirt",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-fleece-jacket-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-title-link",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling ev"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$49.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-fleece-jacket",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-onesie-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-title-link",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom c"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$7.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-onesie",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-test.allthethings()-t-shirt-(red)-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-title-link",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a fe"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-test.allthethings()-t-shirt-(red)",
+                "Add to cart"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "ordem_preco_asc": {
+        "url": "/inventory.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "span",
+                "title",
+                "Products"
+            ],
+            [
+                "span",
+                "active-option",
+                "Price (low to high)"
+            ],
+            [
+                "select",
+                "product-sort-container",
+                "az=Name (A to Z) | za=Name (Z to A) | lohi=Price (low to high) | hilo=Price (high to low)"
+            ],
+            [
+                "div",
+                "inventory-container",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "div",
+                "inventory-list",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-onesie-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-title-link",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom c"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$7.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-onesie",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bike-light-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bike-light",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bolt-t-shirt-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-title-link",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bolt-t-shirt",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-test.allthethings()-t-shirt-(red)-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-title-link",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a fe"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-test.allthethings()-t-shirt-(red)",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-backpack-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-backpack",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-fleece-jacket-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-title-link",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling ev"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$49.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-fleece-jacket",
+                "Add to cart"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "ordem_preco_desc": {
+        "url": "/inventory.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "span",
+                "title",
+                "Products"
+            ],
+            [
+                "span",
+                "active-option",
+                "Price (high to low)"
+            ],
+            [
+                "select",
+                "product-sort-container",
+                "az=Name (A to Z) | za=Name (Z to A) | lohi=Price (low to high) | hilo=Price (high to low)"
+            ],
+            [
+                "div",
+                "inventory-container",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "div",
+                "inventory-list",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-fleece-jacket-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-title-link",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling ev"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$49.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-fleece-jacket",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-backpack-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-backpack",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bolt-t-shirt-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-title-link",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bolt-t-shirt",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-test.allthethings()-t-shirt-(red)-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-title-link",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a fe"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-test.allthethings()-t-shirt-(red)",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bike-light-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bike-light",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-onesie-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-title-link",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom c"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$7.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-onesie",
+                "Add to cart"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "ordem_nome_desc": {
+        "url": "/inventory.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "span",
+                "title",
+                "Products"
+            ],
+            [
+                "span",
+                "active-option",
+                "Name (Z to A)"
+            ],
+            [
+                "select",
+                "product-sort-container",
+                "az=Name (A to Z) | za=Name (Z to A) | lohi=Price (low to high) | hilo=Price (high to low)"
+            ],
+            [
+                "div",
+                "inventory-container",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "div",
+                "inventory-list",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-test.allthethings()-t-shirt-(red)-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-title-link",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a fe"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-test.allthethings()-t-shirt-(red)",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-onesie-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-title-link",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom c"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$7.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-onesie",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-fleece-jacket-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-title-link",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling ev"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$49.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-fleece-jacket",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bolt-t-shirt-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-title-link",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bolt-t-shirt",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bike-light-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bike-light",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-backpack-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-backpack",
+                "Add to cart"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "catalogo_2_no_carrinho": {
+        "url": "/inventory.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 2 Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 2"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "2"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "2"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Products Name (A to Z) Name (Z to A) Price (low to high) Price (high to low)"
+            ],
+            [
+                "span",
+                "title",
+                "Products"
+            ],
+            [
+                "span",
+                "active-option",
+                "Name (A to Z)"
+            ],
+            [
+                "select",
+                "product-sort-container",
+                "az=Name (A to Z) | za=Name (Z to A) | lohi=Price (low to high) | hilo=Price (high to low)"
+            ],
+            [
+                "div",
+                "inventory-container",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "div",
+                "inventory-list",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-backpack-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromis"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "remove-sauce-labs-backpack",
+                "Remove"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bike-light-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding y"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "remove-sauce-labs-bike-light",
+                "Remove"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-bolt-t-shirt-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Bolt T-Shirt Get your testing superhero on with the Sauce Labs bolt T-shirt. From America"
+            ],
+            [
+                "a",
+                "item-1-title-link",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bolt T-Shirt"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-bolt-t-shirt",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-fleece-jacket-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Fleece Jacket It's not every day that you come across a midweight quarter-zip fleece jack"
+            ],
+            [
+                "a",
+                "item-5-title-link",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Fleece Jacket"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling ev"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$49.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-fleece-jacket",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-sauce-labs-onesie-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Sauce Labs Onesie Rib snap infant onesie for the junior automation engineer in development. Reinforc"
+            ],
+            [
+                "a",
+                "item-2-title-link",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Onesie"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom c"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$7.99"
+            ],
+            [
+                "button",
+                "add-to-cart-sauce-labs-onesie",
+                "Add to cart"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-img-link",
+                ""
+            ],
+            [
+                "img",
+                "inventory-item-test.allthethings()-t-shirt-(red)-img",
+                ""
+            ],
+            [
+                "div",
+                "inventory-item-description",
+                "Test.allTheThings() T-Shirt (Red) This classic Sauce Labs t-shirt is perfect to wear when cozying up"
+            ],
+            [
+                "a",
+                "item-3-title-link",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Test.allTheThings() T-Shirt (Red)"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "This classic Sauce Labs t-shirt is perfect to wear when cozying up to your keyboard to automate a fe"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$15.99"
+            ],
+            [
+                "button",
+                "add-to-cart-test.allthethings()-t-shirt-(red)",
+                "Add to cart"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "carrinho": {
+        "url": "/cart.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 2 Your Cart"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 2"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "2"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "2"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Your Cart"
+            ],
+            [
+                "span",
+                "title",
+                "Your Cart"
+            ],
+            [
+                "div",
+                "cart-contents-container",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-list",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-quantity-label",
+                "QTY"
+            ],
+            [
+                "div",
+                "cart-desc-label",
+                "Description"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncomprom"
+            ],
+            [
+                "div",
+                "item-quantity",
+                "1"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "remove-sauce-labs-backpack",
+                "Remove"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "1 Sauce Labs Bike Light A red light isn't the desired state in testing but it sure helps when riding"
+            ],
+            [
+                "div",
+                "item-quantity",
+                "1"
+            ],
+            [
+                "a",
+                "item-0-title-link",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Bike Light"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Wat"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$9.99"
+            ],
+            [
+                "button",
+                "remove-sauce-labs-bike-light",
+                "Remove"
+            ],
+            [
+                "button",
+                "continue-shopping",
+                "Continue Shopping"
+            ],
+            [
+                "button",
+                "checkout",
+                "Checkout"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "carrinho_apos_remover": {
+        "url": "/cart.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Your Cart"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Your Cart"
+            ],
+            [
+                "span",
+                "title",
+                "Your Cart"
+            ],
+            [
+                "div",
+                "cart-contents-container",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-list",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-quantity-label",
+                "QTY"
+            ],
+            [
+                "div",
+                "cart-desc-label",
+                "Description"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncomprom"
+            ],
+            [
+                "div",
+                "item-quantity",
+                "1"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "button",
+                "remove-sauce-labs-backpack",
+                "Remove"
+            ],
+            [
+                "button",
+                "continue-shopping",
+                "Continue Shopping"
+            ],
+            [
+                "button",
+                "checkout",
+                "Checkout"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_info": {
+        "url": "/checkout-step-one.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Checkout: Your Information"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Your Information"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Your Information"
+            ],
+            [
+                "div",
+                "checkout-info-container",
+                "Cancel"
+            ],
+            [
+                "input",
+                "firstName",
+                ""
+            ],
+            [
+                "input",
+                "lastName",
+                ""
+            ],
+            [
+                "input",
+                "postalCode",
+                ""
+            ],
+            [
+                "button",
+                "cancel",
+                "Cancel"
+            ],
+            [
+                "input",
+                "continue",
+                "Continue"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_sem_nome": {
+        "url": "/checkout-step-one.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Checkout: Your Information"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Your Information"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Your Information"
+            ],
+            [
+                "div",
+                "checkout-info-container",
+                "Error: First Name is required Cancel"
+            ],
+            [
+                "input",
+                "firstName",
+                ""
+            ],
+            [
+                "input",
+                "lastName",
+                ""
+            ],
+            [
+                "input",
+                "postalCode",
+                ""
+            ],
+            [
+                "h3",
+                "error",
+                "Error: First Name is required"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "button",
+                "cancel",
+                "Cancel"
+            ],
+            [
+                "input",
+                "continue",
+                "Continue"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_sem_apelido": {
+        "url": "/checkout-step-one.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Checkout: Your Information"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Your Information"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Your Information"
+            ],
+            [
+                "div",
+                "checkout-info-container",
+                "Error: Last Name is required Cancel"
+            ],
+            [
+                "input",
+                "firstName",
+                "Antonio"
+            ],
+            [
+                "input",
+                "lastName",
+                ""
+            ],
+            [
+                "input",
+                "postalCode",
+                ""
+            ],
+            [
+                "h3",
+                "error",
+                "Error: Last Name is required"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "button",
+                "cancel",
+                "Cancel"
+            ],
+            [
+                "input",
+                "continue",
+                "Continue"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_sem_codigo_postal": {
+        "url": "/checkout-step-one.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Checkout: Your Information"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Your Information"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Your Information"
+            ],
+            [
+                "div",
+                "checkout-info-container",
+                "Error: Postal Code is required Cancel"
+            ],
+            [
+                "input",
+                "firstName",
+                "Antonio"
+            ],
+            [
+                "input",
+                "lastName",
+                "Dias"
+            ],
+            [
+                "input",
+                "postalCode",
+                ""
+            ],
+            [
+                "h3",
+                "error",
+                "Error: Postal Code is required"
+            ],
+            [
+                "button",
+                "error-button",
+                ""
+            ],
+            [
+                "button",
+                "cancel",
+                "Cancel"
+            ],
+            [
+                "input",
+                "continue",
+                "Continue"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_resumo": {
+        "url": "/checkout-step-two.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs 1 Checkout: Overview"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs 1"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                "1"
+            ],
+            [
+                "span",
+                "shopping-cart-badge",
+                "1"
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Overview"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Overview"
+            ],
+            [
+                "div",
+                "checkout-summary-container",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-list",
+                "QTYDescription 1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that "
+            ],
+            [
+                "div",
+                "cart-quantity-label",
+                "QTY"
+            ],
+            [
+                "div",
+                "cart-desc-label",
+                "Description"
+            ],
+            [
+                "div",
+                "inventory-item",
+                "1 Sauce Labs Backpack carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncomprom"
+            ],
+            [
+                "div",
+                "item-quantity",
+                "1"
+            ],
+            [
+                "a",
+                "item-4-title-link",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-name",
+                "Sauce Labs Backpack"
+            ],
+            [
+                "div",
+                "inventory-item-desc",
+                "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequ"
+            ],
+            [
+                "div",
+                "inventory-item-price",
+                "$29.99"
+            ],
+            [
+                "div",
+                "payment-info-label",
+                "Payment Information:"
+            ],
+            [
+                "div",
+                "payment-info-value",
+                "SauceCard #31337"
+            ],
+            [
+                "div",
+                "shipping-info-label",
+                "Shipping Information:"
+            ],
+            [
+                "div",
+                "shipping-info-value",
+                "Free Pony Express Delivery!"
+            ],
+            [
+                "div",
+                "total-info-label",
+                "Price Total"
+            ],
+            [
+                "div",
+                "subtotal-label",
+                "Item total: $29.99"
+            ],
+            [
+                "div",
+                "tax-label",
+                "Tax: $2.40"
+            ],
+            [
+                "div",
+                "total-label",
+                "Total: $32.39"
+            ],
+            [
+                "button",
+                "cancel",
+                "Cancel"
+            ],
+            [
+                "button",
+                "finish",
+                "Finish"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "checkout_concluido": {
+        "url": "/checkout-complete.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu Swag Labs Checkout: Complete!"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Complete!"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Complete!"
+            ],
+            [
+                "div",
+                "checkout-complete-container",
+                "Thank you for your order! Your order has been dispatched, and will arrive just as fast as the pony c"
+            ],
+            [
+                "img",
+                "pony-express",
+                ""
+            ],
+            [
+                "h2",
+                "complete-header",
+                "Thank you for your order!"
+            ],
+            [
+                "div",
+                "complete-text",
+                "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+            ],
+            [
+                "button",
+                "back-to-products",
+                "Back Home"
+            ],
+            [
+                "button",
+                "generate-pdf-order",
+                "Generate PDF order"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    },
+    "menu_lateral": {
+        "url": "/checkout-complete.html",
+        "elementos": [
+            [
+                "header",
+                "header-container",
+                "Open Menu All Items Dynamic Catalog About Logout Reset App State Close Menu Swag Labs Checkout: Comp"
+            ],
+            [
+                "div",
+                "primary-header",
+                "Open Menu All Items Dynamic Catalog About Logout Reset App State Close Menu Swag Labs"
+            ],
+            [
+                "img",
+                "open-menu",
+                ""
+            ],
+            [
+                "a",
+                "inventory-sidebar-link",
+                "All Items"
+            ],
+            [
+                "a",
+                "dynamic-catalog-sidebar-link",
+                "Dynamic Catalog"
+            ],
+            [
+                "a",
+                "about-sidebar-link",
+                "About"
+            ],
+            [
+                "a",
+                "logout-sidebar-link",
+                "Logout"
+            ],
+            [
+                "a",
+                "reset-sidebar-link",
+                "Reset App State"
+            ],
+            [
+                "img",
+                "close-menu",
+                ""
+            ],
+            [
+                "a",
+                "shopping-cart-link",
+                ""
+            ],
+            [
+                "div",
+                "secondary-header",
+                "Checkout: Complete!"
+            ],
+            [
+                "span",
+                "title",
+                "Checkout: Complete!"
+            ],
+            [
+                "div",
+                "checkout-complete-container",
+                "Thank you for your order! Your order has been dispatched, and will arrive just as fast as the pony c"
+            ],
+            [
+                "img",
+                "pony-express",
+                ""
+            ],
+            [
+                "h2",
+                "complete-header",
+                "Thank you for your order!"
+            ],
+            [
+                "div",
+                "complete-text",
+                "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+            ],
+            [
+                "button",
+                "back-to-products",
+                "Back Home"
+            ],
+            [
+                "button",
+                "generate-pdf-order",
+                "Generate PDF order"
+            ],
+            [
+                "footer",
+                "footer",
+                "X Facebook LinkedIn © 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ],
+            [
+                "a",
+                "social-x",
+                "X"
+            ],
+            [
+                "a",
+                "social-facebook",
+                "Facebook"
+            ],
+            [
+                "a",
+                "social-linkedin",
+                "LinkedIn"
+            ],
+            [
+                "div",
+                "footer-copy",
+                "© 2026 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+            ]
+        ]
+    }
+}

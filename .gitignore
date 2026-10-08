@@ -20,3 +20,6 @@ playwright-report/
 junit.xml
 results.xml
 *:Zone.Identifier
+
+# Saída de --dry-run do publish_confluence_kb.py
+*.storage.html
