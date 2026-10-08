@@ -10,7 +10,7 @@ Estratégia de seletores: usar exclusivamente o atributo `data-test`, no formato
 
 Origem da informação: seletores e mensagens recolhidos manualmente na aplicação real (Chrome DevTools); regras de negócio revistas e aprovadas pelo autor.
 
-Data da última revisão: 08/10/2026
+Data da última revisão: 08/10/2026 (v2: RN-ORD-03 revista; padrão remove-<produto> qualificado)
 
 ## 1. Utilizadores de Teste
 
@@ -74,7 +74,7 @@ URL: `/inventory.html`
 | Ícone do carrinho | `shopping-cart-link` | a | Abre `/cart.html` |
 | Contador do carrinho | `shopping-cart-badge` | span | Só existe no DOM com pelo menos 1 artigo |
 
-O sufixo `<produto>` dos botões corresponde ao nome do produto em minúsculas, com espaços substituídos por hífenes (ver tabela de produtos).
+O sufixo `<produto>` dos botões corresponde ao nome do produto em minúsculas, com espaços substituídos por hífenes (ver tabela de produtos). O padrão `add-to-cart-<produto>` foi observado nos 6 produtos; o padrão `remove-<produto>` foi observado nos produtos Sauce Labs Backpack e Sauce Labs Bike Light e assume-se igual para os restantes.
 
 Produtos disponíveis (ordem por omissão):
 
@@ -102,7 +102,7 @@ Regras de negócio da ordenação:
 
 - RN-ORD-01: A ordenação por omissão é "Name (A to Z)" (`az`).
 - RN-ORD-02: A opção ativa é apresentada no elemento `active-option`.
-- RN-ORD-03: Produtos com o mesmo preço mantêm entre si a ordem alfabética crescente (ex.: Sauce Labs Bolt T-Shirt e Test.allTheThings() T-Shirt (Red), ambos a $15.99). As validações de ordenação por preço devem verificar a sequência de preços e não a posição exata de produtos empatados.
+- RN-ORD-03: A ordem relativa entre produtos com o mesmo preço não está especificada (ex.: Sauce Labs Bolt T-Shirt e Test.allTheThings() T-Shirt (Red), ambos a $15.99). As validações de ordenação por preço devem verificar a sequência de preços e não a posição de produtos com preço igual.
 
 ## 5. Carrinho de Compras
 
