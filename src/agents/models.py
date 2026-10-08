@@ -40,3 +40,25 @@ class AnalysisSpec(BaseModel):
         default_factory=list,
         description="Informação necessária que não existe na User Story nem no contexto (nunca inventar)",
     )
+
+
+class GeneratedTest(BaseModel):
+    """Uma função de teste Playwright (pytest) correspondente a um cenário do Analista."""
+
+    scenario_id: str = Field(pattern=r"^C\d{2}$", description="ID do cenário implementado (C01, C02, ...)")
+    function_name: str = Field(
+        pattern=r"^test_c\d{2}_[a-z0-9_]+$",
+        description="Nome da função: test_<id em minúsculas>_<descrição curta em snake_case>",
+    )
+    code: str = Field(min_length=20, description="Código Python completo da função (def ...), sem imports")
+
+
+class GeneratedSuite(BaseModel):
+    """Saída do Agente Gerador: implementação Playwright dos cenários de uma User Story."""
+
+    story_key: str = Field(pattern=r"^[A-Z][A-Z0-9]+-\d+$")
+    tests: list[GeneratedTest] = Field(min_length=1)
+    assumptions: list[str] = Field(
+        default_factory=list,
+        description="Valores de exemplo usados que não constam do contexto (ex.: nome, apelido, código postal)",
+    )
