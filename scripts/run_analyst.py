@@ -100,6 +100,7 @@ def main(argv: list[str] | None = None) -> int:
                     "completion_tokens": m.completion_tokens,
                     "latency_ms": m.latency_ms,
                     "cost_usd": m.cost_usd,
+                    "finish_reasons": m.finish_reasons,
                     "correction_requests": m.errors,
                 },
                 "spec": spec.model_dump(),
