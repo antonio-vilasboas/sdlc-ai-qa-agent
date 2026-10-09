@@ -83,6 +83,14 @@ Objetivo dos testes: {summary}
 {context}"""
 
 
+FEEDBACK_TEMPLATE = """
+
+## Correções obrigatórias
+Uma versão anterior destes testes foi rejeitada pelo Agente Validador com os erros abaixo.
+Gera de novo TODAS as funções, corrigindo estes erros e cumprindo as regras:
+{errors}"""
+
+
 @dataclass(frozen=True)
 class GeneratorContext:
     hits: list[Hit]
@@ -183,18 +191,23 @@ def generate(
     model: str,
     api_key: str,
     analyst_sections: Sequence[int] = (),
+    feedback: Sequence[str] = (),
 ) -> GeneratorResult:
+    """Gera os testes. `feedback` contém os erros de uma rejeição anterior do Validador."""
     context = build_context(store, spec, analyst_sections)
+    user = USER_TEMPLATE.format(
+        key=spec.story_key,
+        summary=spec.summary,
+        scenarios=_scenarios_payload(spec),
+        context="\n\n".join(h.content for h in context.hits),
+    )
+    if feedback:
+        user += FEEDBACK_TEMPLATE.format(errors="\n".join(f"- {e}" for e in feedback))
     result = call_structured(
         model=model,
         api_key=api_key,
         system=SYSTEM_PROMPT.format(schema=schema_hint(GeneratedSuite)),
-        user=USER_TEMPLATE.format(
-            key=spec.story_key,
-            summary=spec.summary,
-            scenarios=_scenarios_payload(spec),
-            context="\n\n".join(h.content for h in context.hits),
-        ),
+        user=user,
         schema=GeneratedSuite,
         extra_check=_checker(spec),
         max_tokens=16000,  # 8000 truncou o QAAGENT-6 (5 testes) na 1.ª execução
