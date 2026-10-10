@@ -1,0 +1,84 @@
+# Execução dos testes E2E gerados pelos agentes e envio dos resultados para o Xray.
+#
+# Disparo:
+#   - manual (separador Actions → "Testes E2E gerados" → Run workflow), indicando a User Story;
+#   - automático por evento repository_dispatch (tipo run-generated-tests), com
+#     client_payload {"story": "QAAGENT-6"}, enviado pelo sistema após a geração.
+#
+# Segredos necessários (Settings → Secrets and variables → Actions): XRAY_CLIENT_ID, XRAY_CLIENT_SECRET.
+name: Testes E2E gerados
+
+on:
+  workflow_dispatch:
+    inputs:
+      story:
+        description: "Chave da User Story (ex.: QAAGENT-6)"
+        required: true
+        default: "QAAGENT-6"
+  repository_dispatch:
+    types: [run-generated-tests]
+
+permissions:
+  contents: read  # permissões mínimas: só leitura do repositório
+
+concurrency:
+  group: e2e-${{ github.event.inputs.story || github.event.client_payload.story }}
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    name: E2E ${{ github.event.inputs.story || github.event.client_payload.story }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      STORY: ${{ github.event.inputs.story || github.event.client_payload.story }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar a chave da User Story
+        run: |
+          [[ "$STORY" =~ ^[A-Z][A-Z0-9]+-[0-9]+$ ]] || { echo "Chave inválida: '$STORY'"; exit 1; }
+          echo "STEM=$(echo "$STORY" | tr 'A-Z-' 'a-z_')" >> "$GITHUB_ENV"
+          test -f "outputs/$STORY/xray.json" || { echo "outputs/$STORY/xray.json em falta"; exit 1; }
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Instalar dependências e browser
+        run: |
+          pip install -r requirements-ci.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Testes unitários do Agente Validador
+        run: pytest tests/unit -q
+
+      - name: Testes E2E gerados (headless)
+        id: e2e
+        continue-on-error: true
+        run: >
+          pytest "outputs/$STORY/test_${STEM}.py" -v
+          --junitxml=results/junit.xml
+          --tracing=retain-on-failure --output=results/traces
+
+      - name: Enviar resultados para o Xray
+        if: always() && hashFiles('results/junit.xml') != ''
+        env:
+          XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+          XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        run: python scripts/report_xray.py "$STORY" --junit results/junit.xml
+
+      - name: Guardar relatório e traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-${{ env.STORY }}
+          path: results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Falhar o job se algum teste E2E falhou
+        if: steps.e2e.outcome == 'failure'
+        run: exit 1

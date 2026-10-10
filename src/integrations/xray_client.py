@@ -83,6 +83,13 @@ class XrayClient:
     def update_gherkin(self, issue_id: str, gherkin: str) -> None:
         self.graphql(_UPDATE_GHERKIN, {"issueId": issue_id, "gherkin": gherkin})
 
+    def import_execution(self, payload: dict[str, Any]) -> IssueRef:
+        """Importa resultados no formato JSON do Xray; cria uma Test Execution e devolve a sua chave."""
+        data = _ok(self._http.post(f"{self._root}/api/v2/import/execution", json=payload,
+                                   headers={"Authorization": f"Bearer {self.token}"},
+                                   timeout=HTTP_TIMEOUT_S), "Xray importação de resultados")
+        return IssueRef(issue_id=str(data.get("id", "")), key=str(data.get("key", "")))
+
 
 class JiraLinks:
     """Operações no Jira necessárias à rastreabilidade (pesquisa, atualização e ligação)."""
