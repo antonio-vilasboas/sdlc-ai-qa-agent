@@ -5,7 +5,10 @@
 #   - automático por evento repository_dispatch (tipo run-generated-tests), com
 #     client_payload {"story": "QAAGENT-6"}, enviado pelo sistema após a geração.
 #
-# Segredos necessários (Settings → Secrets and variables → Actions): XRAY_CLIENT_ID, XRAY_CLIENT_SECRET.
+# Segredos necessários (Settings → Secrets and variables → Actions):
+#   XRAY_CLIENT_ID, XRAY_CLIENT_SECRET            — envio dos resultados para o Xray
+#   ATLASSIAN_BASE_URL, ATLASSIAN_USER_EMAIL,
+#   ATLASSIAN_API_TOKEN                           — movimento da User Story no quadro do Jira
 name: Testes E2E gerados
 
 on:
@@ -52,6 +55,13 @@ jobs:
           pip install -r requirements-ci.txt
           python -m playwright install --with-deps chromium
 
+      - name: "Quadro Jira: User Story em Automated Execution"
+        env:
+          ATLASSIAN_BASE_URL: ${{ secrets.ATLASSIAN_BASE_URL }}
+          ATLASSIAN_USER_EMAIL: ${{ secrets.ATLASSIAN_USER_EMAIL }}
+          ATLASSIAN_API_TOKEN: ${{ secrets.ATLASSIAN_API_TOKEN }}
+        run: python scripts/move_story.py "$STORY" "Automated Execution"
+
       - name: Testes unitários do Agente Validador
         run: pytest tests/unit -q
 
@@ -63,11 +73,14 @@ jobs:
           --junitxml=results/junit.xml
           --tracing=retain-on-failure --output=results/traces
 
-      - name: Enviar resultados para o Xray
+      - name: Enviar resultados para o Xray (e mover a User Story para Done / In Review)
         if: always() && hashFiles('results/junit.xml') != ''
         env:
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+          ATLASSIAN_BASE_URL: ${{ secrets.ATLASSIAN_BASE_URL }}
+          ATLASSIAN_USER_EMAIL: ${{ secrets.ATLASSIAN_USER_EMAIL }}
+          ATLASSIAN_API_TOKEN: ${{ secrets.ATLASSIAN_API_TOKEN }}
         run: python scripts/report_xray.py "$STORY" --junit results/junit.xml
 
       - name: Guardar relatório e traces

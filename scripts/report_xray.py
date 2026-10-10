@@ -5,7 +5,9 @@ Uso:
     python scripts/report_xray.py QAAGENT-6 --junit results/junit.xml --dry-run   (só mostra o envio)
 
 Lê outputs/<KEY>/xray.json (função pytest → teste Xray), converte o JUnit XML para o formato
-JSON do Xray e cria uma Test Execution com o estado de cada teste. Corre localmente ou na
+JSON do Xray e cria uma Test Execution com o estado de cada teste. Se as credenciais do
+Jira estiverem disponíveis, move a User Story para "Done" (todos os testes com sucesso) ou
+de volta para "In Review" (há falhas a analisar). Corre localmente ou na
 pipeline do GitHub Actions; só precisa das variáveis XRAY_CLIENT_ID e XRAY_CLIENT_SECRET
 (lidas do ambiente ou do .env), sem as restantes credenciais do projeto.
 """
@@ -29,6 +31,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from scripts.sanity_check import build_session  # noqa: E402
+from src.integrations.jira_board import DONE, IN_REVIEW, credentials_from_env, try_move  # noqa: E402
 from src.integrations.xray_client import XrayClient, XrayError  # noqa: E402
 
 OUTPUTS = ROOT / "outputs"
@@ -87,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("key", help="chave da User Story no Jira (ex.: QAAGENT-6)")
     parser.add_argument("--junit", type=Path, required=True, help="relatório JUnit XML do pytest")
     parser.add_argument("--dry-run", action="store_true", help="mostrar o envio sem o fazer")
+    parser.add_argument("--no-board", action="store_true", help="não mover a User Story no quadro do Jira")
     args = parser.parse_args(argv)
     load_dotenv(ROOT / ".env")
 
@@ -123,7 +127,8 @@ def main(argv: list[str] | None = None) -> int:
     if not client_id or not client_secret:
         print("❌ XRAY_CLIENT_ID e XRAY_CLIENT_SECRET não definidos")
         return 1
-    xray = XrayClient(build_session(), os.getenv("XRAY_BASE_URL", "https://xray.cloud.getxray.app"),
+    http = build_session()
+    xray = XrayClient(http, os.getenv("XRAY_BASE_URL", "https://xray.cloud.getxray.app"),
                       client_id, client_secret)
     print("→ 2/2 A enviar os resultados para o Xray")
     try:
@@ -133,6 +138,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     passed = sum(t["status"] == "PASSED" for t in payload["tests"])
     print(f"  ✅ Test Execution {execution.key} criada: {passed}/{len(payload['tests'])} testes com sucesso")
+
+    board = credentials_from_env()
+    if board and not args.no_board:
+        all_passed = passed == len(payload["tests"]) and not missing
+        try_move(http, board[0], board[1], args.key, DONE if all_passed else IN_REVIEW)
     return 0
 
 

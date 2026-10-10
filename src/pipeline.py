@@ -2,6 +2,9 @@
 
     Jira → Agente Analista → Gherkin → Agente Gerador ⇄ Agente Validador → ficheiros finais
 
+No quadro do Jira, a User Story passa para "AI Generating Tests" no início e para
+"In Review" quando os testes são aprovados pelo Validador.
+
 Se o Validador rejeitar o código, os erros são devolvidos ao Gerador, que gera uma nova
 versão (até MAX_ROUNDS rondas). Cada etapa regista tempo, tokens e custo, para a métrica
 de Ganho de Eficiência Temporal (ET).
@@ -37,6 +40,7 @@ from src.agents.generator import assemble_module, generate  # noqa: E402
 from src.agents.gherkin import render_feature  # noqa: E402
 from src.agents.models import AnalysisSpec  # noqa: E402
 from src.agents.validator import allowed_selectors, validate  # noqa: E402
+from src.integrations.jira_board import GENERATING, IN_REVIEW, try_move  # noqa: E402
 from src.integrations.jira_reader import JiraReadError, fetch_story  # noqa: E402
 from src.llm.structured import CallMetrics, LLMOutputError, temperature_supported  # noqa: E402
 from src.rag.vector_store import KnowledgeStore  # noqa: E402
@@ -84,6 +88,8 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
     stem = key.lower().replace("-", "_")
     store = KnowledgeStore(CHROMA_PATH)
     summary: dict[str, Any] = {"story": key, "started_at": _now(), "model": cfg.llm_model, "stages": {}}
+    http = build_session()
+    try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, GENERATING)
 
     # 1. Agente Analista ---------------------------------------------------------------
     analysis_file = out_dir / "analysis.json"
@@ -97,7 +103,7 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
     else:
         print(f"→ 1/4 Analista: a ler {key} do Jira e a especificar os cenários")
         try:
-            story = fetch_story(build_session(), cfg.atlassian_root, cfg.atlassian_auth, key)
+            story = fetch_story(http, cfg.atlassian_root, cfg.atlassian_auth, key)
             result = analyse(story, store, model=cfg.llm_model, api_key=api_key)
         except (JiraReadError, requests.RequestException, LLMOutputError, ValueError, RuntimeError) as exc:
             print(f"❌ {exc}")
@@ -194,6 +200,7 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
           f"{wall} s no total · custo ${summary['total_cost_usd'] or 0:.4f}")
     print(f"  → resultados em {out_dir.relative_to(ROOT)}/ (resumo em pipeline.json)")
     if report.approved:
+        try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, IN_REVIEW)
         print(f"  Executar: pytest {test_file.relative_to(ROOT)} -v")
     return 0 if report.approved else 1
 
