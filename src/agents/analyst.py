@@ -109,6 +109,7 @@ def analyse(story: JiraStory, store: KnowledgeStore, *, model: str, api_key: str
         user=USER_TEMPLATE.format(story=story.as_text(), context="\n\n".join(h.content for h in context)),
         schema=AnalysisSpec,
         extra_check=_checker(context, n_criteria, story.key),
+        max_tokens=8000,  # 4000 truncou a QAAGENT-6 (6 cenários) numa execução do orquestrador
     )
     return AnalystResult(
         spec=result.value,
