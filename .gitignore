@@ -23,3 +23,8 @@ results.xml
 
 # Saída de --dry-run do publish_confluence_kb.py
 *.storage.html
+
+# Resultados de execução (pipeline e local) e ficheiros de demonstração do Validador
+results/
+outputs/**/mutado_*
+outputs/**/validation_mutado_*

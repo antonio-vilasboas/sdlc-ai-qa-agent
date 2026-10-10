@@ -1,0 +1,36 @@
+{
+  "published_at": "2026-10-10T17:19:03+00:00",
+  "story": "QAAGENT-6",
+  "tests": {
+    "C01": {
+      "test_key": "QAAGENT-7",
+      "issue_id": "10074",
+      "function": "test_c01_iniciar_checkout_com_produto_no_carrinho"
+    },
+    "C02": {
+      "test_key": "QAAGENT-8",
+      "issue_id": "10075",
+      "function": "test_c02_avancar_com_informacao_completa_ate_resumo"
+    },
+    "C03": {
+      "test_key": "QAAGENT-9",
+      "issue_id": "10076",
+      "function": "test_c03_verificar_subtotal_taxa_e_total_no_resumo"
+    },
+    "C04": {
+      "test_key": "QAAGENT-10",
+      "issue_id": "10077",
+      "function": "test_c04_finalizar_encomenda_e_ver_confirmacao"
+    },
+    "C05": {
+      "test_key": "QAAGENT-11",
+      "issue_id": "10078",
+      "function": "test_c05_bloquear_avanco_sem_codigo_postal"
+    },
+    "C06": {
+      "test_key": "QAAGENT-12",
+      "issue_id": "10079",
+      "function": "test_c06_mostrar_apenas_primeira_mensagem_campo_em_falta"
+    }
+  }
+}

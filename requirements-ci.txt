@@ -1,0 +1,7 @@
+# Dependências mínimas para a pipeline de execução (sem LLM, ChromaDB nem modelo de embeddings)
+playwright==1.48.0
+pytest==8.3.3
+pytest-playwright==0.5.2
+requests==2.32.3
+python-dotenv==1.0.1
+pydantic==2.9.2
