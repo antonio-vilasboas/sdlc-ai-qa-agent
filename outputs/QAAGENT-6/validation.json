@@ -1,0 +1,51 @@
+{
+  "validated_at": "2026-10-10T17:05:22+00:00",
+  "file": "test_qaagent_6.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_iniciar_checkout_com_produto_no_carrinho",
+    "test_c02_avancar_com_informacao_completa_ate_resumo",
+    "test_c03_verificar_subtotal_taxa_e_total_no_resumo",
+    "test_c04_finalizar_encomenda_e_ver_confirmacao",
+    "test_c05_bloquear_avanco_sem_codigo_postal",
+    "test_c06_mostrar_apenas_primeira_mensagem_campo_em_falta"
+  ],
+  "selectors_used": [
+    "add-to-cart-sauce-labs-backpack",
+    "checkout",
+    "complete-header",
+    "complete-text",
+    "continue",
+    "error",
+    "finish",
+    "firstName",
+    "inventory-item-name",
+    "inventory-item-price",
+    "inventory-list",
+    "item-quantity",
+    "lastName",
+    "login-button",
+    "password",
+    "payment-info-value",
+    "postalCode",
+    "remove-sauce-labs-backpack",
+    "shipping-info-value",
+    "shopping-cart-badge",
+    "shopping-cart-link",
+    "subtotal-label",
+    "tax-label",
+    "title",
+    "total-label",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_iniciar_checkout_com_produto_no_carrinho": 14,
+    "test_c02_avancar_com_informacao_completa_ate_resumo": 8,
+    "test_c03_verificar_subtotal_taxa_e_total_no_resumo": 7,
+    "test_c04_finalizar_encomenda_e_ver_confirmacao": 7,
+    "test_c05_bloquear_avanco_sem_codigo_postal": 7,
+    "test_c06_mostrar_apenas_primeira_mensagem_campo_em_falta": 8
+  },
+  "issues": []
+}
