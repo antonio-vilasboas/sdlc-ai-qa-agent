@@ -77,8 +77,8 @@ def build_payload(key: str, mapping: dict[str, dict[str, str]], results: dict[st
         "info": {
             "summary": f"[{key}] Execução automática dos testes gerados",
             "description": description,
+            "project": key.rsplit("-", 1)[0],
             "finishDate": now,
-            "testEnvironments": ["chromium"],
         },
         "tests": tests,
     }
