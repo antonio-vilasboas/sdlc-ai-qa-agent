@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-10-10T20:46:07+00:00",
+  "story_summary": "Autenticação de utilizador com credenciais válidas",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    9,
+    3,
+    8
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4754,
+    "completion_tokens": 1477,
+    "latency_ms": 7487,
+    "cost_usd": 0.001214,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-1",
+    "summary": "Validar que um cliente registado com credenciais válidas acede ao catálogo de produtos, com o título da secção e a lista de produtos visíveis.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Login com credenciais válidas redireciona para o catálogo",
+        "type": "nominal",
+        "given": [
+          "O utilizador está na página de login da aplicação"
+        ],
+        "when": [
+          "Introduz o utilizador válido no campo de utilizador",
+          "Introduz a password correspondente no campo de password",
+          "Submete o formulário de login"
+        ],
+        "then": [
+          "O utilizador é redirecionado para a página de catálogo de produtos"
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "url_destino": "/inventory.html"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Título da secção de produtos visível após login",
+        "type": "nominal",
+        "given": [
+          "O utilizador autenticou-se com credenciais válidas e está na página de catálogo"
+        ],
+        "when": [
+          "Observa o título da secção de produtos"
+        ],
+        "then": [
+          "O título da secção de produtos é visível",
+          "O título apresentado é \"Products\""
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "titulo_esperado": "Products"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Lista de produtos disponíveis apresentada após login",
+        "type": "nominal",
+        "given": [
+          "O utilizador autenticou-se com credenciais válidas e está na página de catálogo"
+        ],
+        "when": [
+          "Observa a lista de produtos disponíveis"
+        ],
+        "then": [
+          "A lista de produtos é apresentada",
+          "A lista contém os 6 produtos disponíveis, com nome e preço"
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "numero_produtos_esperado": "6",
+          "produtos_esperados": "Sauce Labs Backpack ($29.99); Sauce Labs Bike Light ($9.99); Sauce Labs Bolt T-Shirt ($15.99); Sauce Labs Fleece Jacket ($49.99); Sauce Labs Onesie ($7.99); Test.allTheThings() T-Shirt (Red) ($15.99)"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}

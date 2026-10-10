@@ -1,0 +1,98 @@
+{
+  "generated_at": "2026-10-10T20:46:18+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "O utilizador está na página de login da aplicação": [
+      1,
+      2
+    ],
+    "Introduz o utilizador válido no campo de utilizador": [
+      6,
+      1
+    ],
+    "Introduz a password correspondente no campo de password": [
+      1,
+      2
+    ],
+    "Submete o formulário de login": [
+      1,
+      2
+    ],
+    "O utilizador é redirecionado para a página de catálogo de produtos": [
+      9,
+      3
+    ],
+    "O utilizador autenticou-se com credenciais válidas e está na página de catálogo": [
+      1,
+      2
+    ],
+    "Observa o título da secção de produtos": [
+      3,
+      4
+    ],
+    "O título da secção de produtos é visível": [
+      4,
+      8
+    ],
+    "O título apresentado é \"Products\"": [
+      8,
+      3
+    ],
+    "Observa a lista de produtos disponíveis": [
+      3,
+      5
+    ],
+    "A lista de produtos é apresentada": [
+      3,
+      5
+    ],
+    "A lista contém os 6 produtos disponíveis, com nome e preço": [
+      3,
+      8
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 6591,
+    "completion_tokens": 2729,
+    "latency_ms": 10127,
+    "cost_usd": 0.002024,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-1",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_login_valido",
+        "code": "def test_c01_login_valido(page: Page) -> None:\n    # Dado O utilizador está na página de login da aplicação\n    page.goto(BASE_URL + \"/\")\n    expect(page.locator('[data-test=\"login-button\"]')).to_be_visible()\n    # Quando Introduz o utilizador válido no campo de utilizador\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    # E Introduz a password correspondente no campo de password\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    # E Submete o formulário de login\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então O utilizador é redirecionado para a página de catálogo de produtos\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_titulo_seccao_produtos_visivel",
+        "code": "def test_c02_titulo_seccao_produtos_visivel(page: Page) -> None:\n    # Dado O utilizador autenticou-se com credenciais válidas e está na página de catálogo\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # Quando Observa o título da secção de produtos\n    titulo = page.locator('[data-test=\"title\"]')\n    # Então O título da secção de produtos é visível\n    expect(titulo).to_be_visible()\n    # E O título apresentado é \"Products\"\n    expect(titulo).to_have_text(\"Products\")"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_lista_produtos_apresentada",
+        "code": "def test_c03_lista_produtos_apresentada(page: Page) -> None:\n    # Dado O utilizador autenticou-se com credenciais válidas e está na página de catálogo\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # Quando Observa a lista de produtos disponíveis\n    lista = page.locator('[data-test=\"inventory-list\"]')\n    # Então A lista de produtos é apresentada\n    expect(lista).to_be_visible()\n    # E A lista contém os 6 produtos disponíveis, com nome e preço\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text([\n        \"Sauce Labs Backpack\",\n        \"Sauce Labs Bike Light\",\n        \"Sauce Labs Bolt T-Shirt\",\n        \"Sauce Labs Fleece Jacket\",\n        \"Sauce Labs Onesie\",\n        \"Test.allTheThings() T-Shirt (Red)\",\n    ])\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text([\n        \"$29.99\",\n        \"$9.99\",\n        \"$15.99\",\n        \"$49.99\",\n        \"$7.99\",\n        \"$15.99\",\n    ])"
+      }
+    ],
+    "assumptions": []
+  }
+}
