@@ -71,7 +71,7 @@ jobs:
         run: >
           pytest "outputs/$STORY/test_${STEM}.py" -v
           --junitxml=results/junit.xml
-          --tracing=retain-on-failure --output=results/traces
+          --screenshot=on --tracing=retain-on-failure --output=results/evidencias
 
       - name: Enviar resultados para o Xray (e mover a User Story para Done / In Review)
         if: always() && hashFiles('results/junit.xml') != ''
@@ -81,9 +81,9 @@ jobs:
           ATLASSIAN_BASE_URL: ${{ secrets.ATLASSIAN_BASE_URL }}
           ATLASSIAN_USER_EMAIL: ${{ secrets.ATLASSIAN_USER_EMAIL }}
           ATLASSIAN_API_TOKEN: ${{ secrets.ATLASSIAN_API_TOKEN }}
-        run: python scripts/report_xray.py "$STORY" --junit results/junit.xml
+        run: python scripts/report_xray.py "$STORY" --junit results/junit.xml --evidence results/evidencias
 
-      - name: Guardar relatório e traces
+      - name: Guardar relatório, capturas de ecrã e traces
         if: always()
         uses: actions/upload-artifact@v4
         with:

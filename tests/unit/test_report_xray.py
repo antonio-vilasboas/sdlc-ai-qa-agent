@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from scripts.report_xray import build_payload, junit_results  # noqa: E402
+from scripts.report_xray import build_payload, find_evidence, junit_results  # noqa: E402
 
 JUNIT = """<?xml version="1.0" encoding="utf-8"?>
 <testsuites><testsuite name="pytest" tests="3">
@@ -46,3 +46,13 @@ def test_payload_usa_chaves_xray_e_assinala_testes_sem_resultado(tmp_path: Path)
     assert [(t["testKey"], t["status"]) for t in payload["tests"]] == [("QAAGENT-7", "PASSED"), ("QAAGENT-8", "FAILED")]
     assert missing == ["C04 (test_c04_inexistente)"]
     assert "https://ci/run/1" in payload["info"]["description"]
+
+
+def test_evidencias_associadas_pela_pasta_do_teste(tmp_path: Path) -> None:
+    d = tmp_path / "outputs-qaagent-6-test-qaagent-6-py-test-c01-login-chromium"
+    d.mkdir()
+    (d / "test-finished-1.png").write_bytes(b"\x89PNG")
+    (tmp_path / "outro-test-c02-resumo-chromium").mkdir()
+    assert [p.name for p in find_evidence(tmp_path, "test_c01_login")] == ["test-finished-1.png"]
+    assert find_evidence(tmp_path, "test_c02_resumo") == []
+    assert find_evidence(None, "test_c01_login") == []

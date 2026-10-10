@@ -2,7 +2,11 @@
 
 Uso:
     python scripts/report_xray.py QAAGENT-6 --junit results/junit.xml
+    python scripts/report_xray.py QAAGENT-6 --junit results/junit.xml --evidence results/evidencias
     python scripts/report_xray.py QAAGENT-6 --junit results/junit.xml --dry-run   (só mostra o envio)
+
+Com --evidence, a captura de ecrã final de cada teste (pytest --screenshot=on) é anexada
+ao respetivo resultado no Xray como evidência.
 
 Lê outputs/<KEY>/xray.json (função pytest → teste Xray), converte o JUnit XML para o formato
 JSON do Xray e cria uma Test Execution com o estado de cada teste. Se as credenciais do
@@ -15,6 +19,7 @@ pipeline do GitHub Actions; só precisa das variáveis XRAY_CLIENT_ID e XRAY_CLI
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import re
@@ -56,8 +61,20 @@ def junit_results(path: Path) -> dict[str, dict[str, Any]]:
     return results
 
 
+def find_evidence(evidence_dir: Path | None, function: str) -> list[Path]:
+    """Capturas de ecrã do pytest-playwright para uma função de teste.
+
+    O plugin cria uma pasta por teste cujo nome contém o nome da função com hífenes
+    (ex.: ...-test-c01-iniciar-checkout-chromium/test-finished-1.png).
+    """
+    if evidence_dir is None or not evidence_dir.is_dir():
+        return []
+    token = function.replace("_", "-")
+    return sorted(p for d in evidence_dir.iterdir() if d.is_dir() and token in d.name for p in d.glob("*.png"))
+
+
 def build_payload(key: str, mapping: dict[str, dict[str, str]], results: dict[str, dict[str, Any]],
-                  run_url: str | None) -> tuple[dict[str, Any], list[str]]:
+                  run_url: str | None, evidence_dir: Path | None = None) -> tuple[dict[str, Any], list[str]]:
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     tests: list[dict[str, Any]] = []
     missing: list[str] = []
@@ -69,7 +86,15 @@ def build_payload(key: str, mapping: dict[str, dict[str, str]], results: dict[st
         comment = f"{ref['function']} · {result['time']:.1f} s"
         if result["message"]:
             comment += f"\n{result['message']}"
-        tests.append({"testKey": ref["test_key"], "status": result["status"], "comment": comment})
+        test: dict[str, Any] = {"testKey": ref["test_key"], "status": result["status"], "comment": comment}
+        shots = find_evidence(evidence_dir, ref["function"])
+        if shots:
+            test["evidence"] = [
+                {"data": base64.b64encode(p.read_bytes()).decode(), "filename": f"{scenario_id}_{p.name}",
+                 "contentType": "image/png"}
+                for p in shots
+            ]
+        tests.append(test)
     description = f"Execução automática dos testes gerados para {key}."
     if run_url:
         description += f" Pipeline: {run_url}"
@@ -90,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("key", help="chave da User Story no Jira (ex.: QAAGENT-6)")
     parser.add_argument("--junit", type=Path, required=True, help="relatório JUnit XML do pytest")
     parser.add_argument("--dry-run", action="store_true", help="mostrar o envio sem o fazer")
+    parser.add_argument("--evidence", type=Path, help="pasta de saída do pytest-playwright (capturas de ecrã)")
     parser.add_argument("--no-board", action="store_true", help="não mover a User Story no quadro do Jira")
     args = parser.parse_args(argv)
     load_dotenv(ROOT / ".env")
@@ -107,11 +133,12 @@ def main(argv: list[str] | None = None) -> int:
     run_url = None
     if os.getenv("GITHUB_RUN_ID"):
         run_url = f"{os.getenv('GITHUB_SERVER_URL')}/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}"
-    payload, missing = build_payload(args.key, mapping, results, run_url)
+    payload, missing = build_payload(args.key, mapping, results, run_url, args.evidence)
 
     print(f"→ 1/2 Resultados lidos de {args.junit}")
     for t in payload["tests"]:
-        print(f"  {'✅' if t['status'] == 'PASSED' else '❌'} {t['testKey']}  {t['status']}  {t['comment'].splitlines()[0]}")
+        shots = f" · {len(t['evidence'])} captura(s)" if t.get("evidence") else ""
+        print(f"  {'✅' if t['status'] == 'PASSED' else '❌'} {t['testKey']}  {t['status']}  {t['comment'].splitlines()[0]}{shots}")
     if missing:
         print(f"  ⚠️  sem resultado no JUnit: {', '.join(missing)}")
     if not payload["tests"]:
@@ -119,8 +146,9 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     if args.dry_run:
-        print("\n→ 2/2 --dry-run: conteúdo que seria enviado ao Xray")
-        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        print("\n→ 2/2 --dry-run: conteúdo que seria enviado ao Xray (capturas omitidas)")
+        preview = {**payload, "tests": [{k: v for k, v in t.items() if k != "evidence"} for t in payload["tests"]]}
+        print(json.dumps(preview, ensure_ascii=False, indent=2))
         return 0
 
     client_id, client_secret = os.getenv("XRAY_CLIENT_ID"), os.getenv("XRAY_CLIENT_SECRET")
