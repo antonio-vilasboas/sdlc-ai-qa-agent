@@ -12,6 +12,7 @@ de Ganho de Eficiência Temporal (ET).
 Uso:
     python -m src.pipeline QAAGENT-6
     python -m src.pipeline QAAGENT-6 --reuse-analysis   (reaproveita outputs/<KEY>/analysis.json)
+    python -m src.pipeline QAAGENT-6 --publish          (+ Xray + GitHub Actions: ciclo completo)
 
 Resultado em outputs/<KEY>/: analysis.json, <key>.feature, test_<key>.py, generation.json,
 validation.json e pipeline.json (resumo e métricas por etapa).
@@ -29,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
+from dotenv import dotenv_values
 from pydantic import ValidationError
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,6 +42,7 @@ from src.agents.generator import assemble_module, generate  # noqa: E402
 from src.agents.gherkin import render_feature  # noqa: E402
 from src.agents.models import AnalysisSpec  # noqa: E402
 from src.agents.validator import allowed_selectors, validate  # noqa: E402
+from src.integrations.github_ci import CIError, dispatch, push_outputs  # noqa: E402
 from src.integrations.jira_board import GENERATING, IN_REVIEW, try_move  # noqa: E402
 from src.integrations.jira_reader import JiraReadError, fetch_story  # noqa: E402
 from src.llm.structured import CallMetrics, LLMOutputError, temperature_supported  # noqa: E402
@@ -75,8 +78,9 @@ def _fmt(m: CallMetrics) -> str:
     return f"tentativas {m.attempts} · tokens {m.prompt_tokens}/{m.completion_tokens} · {m.latency_ms / 1000:.1f} s · {cost}"
 
 
-def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR0915
+def run(key: str, *, reuse_analysis: bool = False, publish: bool = False) -> int:  # noqa: PLR0911, PLR0915
     t_start = time.perf_counter()
+    n_steps = 7 if publish else 4
     try:
         cfg = load_settings()
     except ValidationError as exc:
@@ -94,14 +98,14 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
     # 1. Agente Analista ---------------------------------------------------------------
     analysis_file = out_dir / "analysis.json"
     if reuse_analysis and analysis_file.exists():
-        print(f"→ 1/4 Analista: a reaproveitar {analysis_file.relative_to(ROOT)}")
+        print(f"→ 1/{n_steps} Analista: a reaproveitar {analysis_file.relative_to(ROOT)}")
         data = json.loads(analysis_file.read_text(encoding="utf-8"))
         spec = AnalysisSpec.model_validate(data["spec"])
         title = data.get("story_summary", key)
         analyst_sections = data.get("context_sections", [])
         summary["stages"]["analyst"] = {"reused": True}
     else:
-        print(f"→ 1/4 Analista: a ler {key} do Jira e a especificar os cenários")
+        print(f"→ 1/{n_steps} Analista: a ler {key} do Jira e a especificar os cenários")
         try:
             story = fetch_story(http, cfg.atlassian_root, cfg.atlassian_auth, key)
             result = analyse(story, store, model=cfg.llm_model, api_key=api_key)
@@ -126,7 +130,7 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
     # 2. Gherkin (determinístico) ------------------------------------------------------
     feature_file = out_dir / f"{stem}.feature"
     feature_file.write_text(render_feature(spec, title), encoding="utf-8")
-    print(f"→ 2/4 Gherkin: {feature_file.relative_to(ROOT)} (sem LLM)")
+    print(f"→ 2/{n_steps} Gherkin: {feature_file.relative_to(ROOT)} (sem LLM)")
 
     # 3 e 4. Gerador ⇄ Validador ------------------------------------------------------
     allowed = allowed_selectors(h.content for h in store.all_sections())
@@ -138,7 +142,7 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
 
     for rnd in range(1, MAX_ROUNDS + 1):
         label = "geração inicial" if rnd == 1 else f"correção pedida pelo Validador ({len(feedback)} erros)"
-        print(f"→ 3/4 Gerador, ronda {rnd}: {label}")
+        print(f"→ 3/{n_steps} Gerador, ronda {rnd}: {label}")
         try:
             gen = generate(spec, store, model=cfg.llm_model, api_key=api_key,
                            analyst_sections=analyst_sections, feedback=feedback)
@@ -149,7 +153,7 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
         test_file.write_text(code, encoding="utf-8")
         print(f"  ✅ {len(gen.suite.tests)} testes · secções {gen.context.sections} · {_fmt(gen.metrics)}")
 
-        print(f"→ 4/4 Validador, ronda {rnd}")
+        print(f"→ 4/{n_steps} Validador, ronda {rnd}")
         report = validate(code, allowed, scenario_ids)
         print(f"  {'✅ APROVADO' if report.approved else '❌ REJEITADO'} "
               f"({len(report.errors)} erros, {len(report.warnings)} avisos)")
@@ -199,10 +203,41 @@ def run(key: str, *, reuse_analysis: bool = False) -> int:  # noqa: PLR0911, PLR
     print(f"\n{'✅' if report.approved else '❌'} {key}: {len(spec.scenarios)} cenários · {len(rounds)} ronda(s) · "
           f"{wall} s no total · custo ${summary['total_cost_usd'] or 0:.4f}")
     print(f"  → resultados em {out_dir.relative_to(ROOT)}/ (resumo em pipeline.json)")
-    if report.approved:
-        try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, IN_REVIEW)
+    if not report.approved:
+        return 1
+    try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, IN_REVIEW)
+    if not publish:
         print(f"  Executar: pytest {test_file.relative_to(ROOT)} -v")
-    return 0 if report.approved else 1
+        print("  (com --publish: registo no Xray + execução automática no GitHub Actions)")
+        return 0
+    return _publish_and_dispatch(key, http)
+
+
+def _publish_and_dispatch(key: str, http: requests.Session) -> int:
+    """Etapas 5–7: registo no Xray, publicação dos testes num ramo e disparo da pipeline (RF06, RF07)."""
+    from scripts.publish_tests_xray import main as publish_tests  # import tardio: só com --publish
+
+    print("\n→ 5/7 Registo dos testes no Xray")
+    if publish_tests([key]) != 0:
+        return 1
+
+    env = dotenv_values(ROOT / ".env")
+    repository, token = env.get("GITHUB_REPOSITORY"), env.get("GITHUB_DISPATCH_TOKEN")
+    if not repository or not token:
+        print("❌ GITHUB_REPOSITORY e GITHUB_DISPATCH_TOKEN em falta no .env: pipeline não disparada")
+        return 1
+    try:
+        print("→ 6/7 A publicar os testes gerados no GitHub")
+        branch, commit = push_outputs(ROOT, key)
+        print(f"  ✅ outputs/{key}/ → ramo {branch} (commit {commit[:7]})")
+        print("→ 7/7 A disparar a pipeline do GitHub Actions (repository_dispatch)")
+        dispatch(http, repository, token, key, branch)
+    except (CIError, requests.RequestException) as exc:
+        print(f"❌ {exc}")
+        return 1
+    print(f"  ✅ pipeline disparada: https://github.com/{repository}/actions")
+    print("  A User Story passa a Automated Execution e, no fim, a Done (ou volta a In Review se houver falhas).")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -210,8 +245,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("key", help="chave da User Story no Jira (ex.: QAAGENT-6)")
     parser.add_argument("--reuse-analysis", action="store_true",
                         help="reaproveitar outputs/<KEY>/analysis.json em vez de chamar o Analista")
+    parser.add_argument("--publish", action="store_true",
+                        help="registar no Xray, publicar os testes e disparar a pipeline do GitHub Actions")
     args = parser.parse_args(argv)
-    return run(args.key, reuse_analysis=args.reuse_analysis)
+    return run(args.key, reuse_analysis=args.reuse_analysis, publish=args.publish)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,8 @@
 # Disparo:
 #   - manual (separador Actions → "Testes E2E gerados" → Run workflow), indicando a User Story;
 #   - automático por evento repository_dispatch (tipo run-generated-tests), com
-#     client_payload {"story": "QAAGENT-6"}, enviado pelo sistema após a geração.
+#     client_payload {"story": "QAAGENT-6", "ref": "testes/qaagent-6"}, enviado pelo
+#     orquestrador (python -m src.pipeline <KEY> --publish) após a geração e validação.
 #
 # Segredos necessários (Settings → Secrets and variables → Actions):
 #   XRAY_CLIENT_ID, XRAY_CLIENT_SECRET            — envio dos resultados para o Xray
@@ -37,6 +38,9 @@ jobs:
       STORY: ${{ github.event.inputs.story || github.event.client_payload.story }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # repository_dispatch do orquestrador indica o ramo com os testes gerados (testes/<key>)
+          ref: ${{ github.event.client_payload.ref || github.ref }}
 
       - name: Validar a chave da User Story
         run: |
