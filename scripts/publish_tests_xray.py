@@ -78,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
         for sc in spec.scenarios:
             label = f"{story_label}-{sc.id.lower()}"
             summary = f"[{key}] {sc.id} – {sc.title}"
-            gherkin = "\n".join(scenario_steps(sc))
+            gherkin = "\n".join(scenario_steps(sc, keywords="en"))  # o Xray só aceita palavras-chave em inglês
             existing = jira.find_by_label(cfg.jira_project_key, label)
             if existing is None:
                 ref = xray.create_cucumber_test(cfg.jira_project_key, summary, [GENERATED_LABEL, story_label, label], gherkin)

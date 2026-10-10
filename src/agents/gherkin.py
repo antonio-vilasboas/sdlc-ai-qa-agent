@@ -12,11 +12,20 @@ from src.agents.models import AnalysisSpec, Scenario
 _INDENT = "  "
 
 
-def scenario_steps(sc: Scenario) -> list[str]:
-    """Passos do cenário com as palavras-chave Gherkin em português (Dado/Quando/Então/E)."""
+_KEYWORDS = {
+    "pt": ("Dado", "Quando", "Então", "E"),
+    # O editor de testes Cucumber do Xray Cloud só reconhece as palavras-chave em inglês;
+    # o texto dos passos mantém-se em português.
+    "en": ("Given", "When", "Then", "And"),
+}
+
+
+def scenario_steps(sc: Scenario, keywords: str = "pt") -> list[str]:
+    """Passos do cenário com as palavras-chave Gherkin em português (omissão) ou inglês."""
+    given_kw, when_kw, then_kw, and_kw = _KEYWORDS[keywords]
     lines: list[str] = []
-    for keyword, steps in (("Dado", sc.given), ("Quando", sc.when), ("Então", sc.then)):
-        lines += [f"{keyword if i == 0 else 'E'} {step.strip().rstrip('.')}" for i, step in enumerate(steps)]
+    for keyword, steps in ((given_kw, sc.given), (when_kw, sc.when), (then_kw, sc.then)):
+        lines += [f"{keyword if i == 0 else and_kw} {step.strip().rstrip('.')}" for i, step in enumerate(steps)]
     return lines
 
 
