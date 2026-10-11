@@ -1,0 +1,21 @@
+{
+  "published_at": "2026-10-11T15:12:48+00:00",
+  "story": "QAAGENT-2",
+  "tests": {
+    "C01": {
+      "test_key": "QAAGENT-19",
+      "issue_id": "10086",
+      "function": "test_c01_acesso_recusado_conta_bloqueada"
+    },
+    "C02": {
+      "test_key": "QAAGENT-20",
+      "issue_id": "10087",
+      "function": "test_c02_mensagem_conta_bloqueada"
+    },
+    "C03": {
+      "test_key": "QAAGENT-21",
+      "issue_id": "10088",
+      "function": "test_c03_fecho_mensagem_erro_conta_bloqueada"
+    }
+  }
+}

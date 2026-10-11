@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-10-11T15:12:26+00:00",
+  "story_summary": "Bloqueio de acesso a utilizador com conta bloqueada",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    6,
+    9,
+    8
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4412,
+    "completion_tokens": 1575,
+    "latency_ms": 7697,
+    "cost_usd": 0.001229,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-2",
+    "summary": "Validar que uma conta bloqueada não consegue iniciar sessão, que o utilizador permanece na página de login com a mensagem de conta bloqueada, e que essa mensagem pode ser fechada.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Acesso recusado a conta bloqueada e permanência no login",
+        "type": "exceção",
+        "given": [
+          "Estou na página de login da loja Swag Labs"
+        ],
+        "when": [
+          "Introduzo o utilizador da conta bloqueada e a respetiva password",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "O acesso à loja é recusado",
+          "Permaneço na página de login (/)",
+          "Não sou redirecionado para a página de produtos"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "url_login": "https://www.saucedemo.com/"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Mensagem de conta bloqueada apresentada no login",
+        "type": "exceção",
+        "given": [
+          "Estou na página de login da loja Swag Labs"
+        ],
+        "when": [
+          "Introduzo o utilizador da conta bloqueada e a respetiva password",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "É apresentada uma mensagem de erro",
+          "A mensagem indica que a conta se encontra bloqueada, com o texto exato 'Epic sadface: Sorry, this user has been locked out.'"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro": "Epic sadface: Sorry, this user has been locked out."
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Fecho da mensagem de erro de conta bloqueada",
+        "type": "exceção",
+        "given": [
+          "Estou na página de login da loja Swag Labs",
+          "Tentei autenticar-me com a conta bloqueada e a mensagem de erro de conta bloqueada está apresentada"
+        ],
+        "when": [
+          "Aciono o botão de fecho da mensagem de erro"
+        ],
+        "then": [
+          "A mensagem de erro deixa de estar visível",
+          "Permaneço na página de login (/)"
+        ],
+        "rules": [
+          "RN-LOGIN-06",
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro": "Epic sadface: Sorry, this user has been locked out.",
+          "url_login": "https://www.saucedemo.com/"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}
