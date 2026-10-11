@@ -49,17 +49,17 @@ flowchart LR
 
     CONF --> KB
     JIRA --> AN
-    KB -->|secção 0 + top-5| AN
-    AN -->|cenários| GK
-    AN -->|cenários| GE
-    KB -->|top-2 por passo| GE
-    GE -->|código| VA
-    VA -.->|erros (máx. 2 rondas)| GE
-    VA -->|aprovado| XR
-    VA -->|repository_dispatch| GH
+    KB -->|"secção 0 + top-5"| AN
+    AN -->|"cenários"| GK
+    AN -->|"cenários"| GE
+    KB -->|"top-2 por passo"| GE
+    GE -->|"código"| VA
+    VA -.->|"erros (máx. 2 rondas)"| GE
+    VA -->|"aprovado"| XR
+    VA -->|"repository_dispatch"| GH
     GH --> SW
-    GH -->|resultados + evidências| XR
-    XR -->|cobertura| JIRA
+    GH -->|"resultados + evidências"| XR
+    XR -->|"cobertura"| JIRA
 ```
 
 | Componente | O que faz |
