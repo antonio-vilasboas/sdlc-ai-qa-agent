@@ -78,7 +78,8 @@ def _fmt(m: CallMetrics) -> str:
     return f"tentativas {m.attempts} · tokens {m.prompt_tokens}/{m.completion_tokens} · {m.latency_ms / 1000:.1f} s · {cost}"
 
 
-def run(key: str, *, reuse_analysis: bool = False, publish: bool = False) -> int:  # noqa: PLR0911, PLR0915
+def run(key: str, *, reuse_analysis: bool = False, publish: bool = False,
+        out_root: Path | None = None, board: bool = True) -> int:  # noqa: PLR0911, PLR0915
     t_start = time.perf_counter()
     n_steps = 7 if publish else 4
     try:
@@ -87,13 +88,14 @@ def run(key: str, *, reuse_analysis: bool = False, publish: bool = False) -> int
         print(f"❌ .env inválido: {exc}")
         return 1
     api_key = cfg.anthropic_api_key.get_secret_value()
-    out_dir = OUTPUTS / key
+    out_dir = (out_root or OUTPUTS) / key
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = key.lower().replace("-", "_")
     store = KnowledgeStore(CHROMA_PATH)
     summary: dict[str, Any] = {"story": key, "started_at": _now(), "model": cfg.llm_model, "stages": {}}
     http = build_session()
-    try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, GENERATING)
+    if board:
+        try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, GENERATING)
 
     # 1. Agente Analista ---------------------------------------------------------------
     analysis_file = out_dir / "analysis.json"
@@ -205,7 +207,8 @@ def run(key: str, *, reuse_analysis: bool = False, publish: bool = False) -> int
     print(f"  → resultados em {out_dir.relative_to(ROOT)}/ (resumo em pipeline.json)")
     if not report.approved:
         return 1
-    try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, IN_REVIEW)
+    if board:
+        try_move(http, cfg.atlassian_root, cfg.atlassian_auth, key, IN_REVIEW)
     if not publish:
         print(f"  Executar: pytest {test_file.relative_to(ROOT)} -v")
         print("  (com --publish: registo no Xray + execução automática no GitHub Actions)")
