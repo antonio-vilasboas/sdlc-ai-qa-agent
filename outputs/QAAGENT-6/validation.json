@@ -1,15 +1,16 @@
 {
-  "validated_at": "2026-10-10T17:05:22+00:00",
+  "validated_at": "2026-10-18T19:40:28+00:00",
   "file": "test_qaagent_6.py",
   "allowed_selectors": 52,
   "approved": true,
   "tests": [
-    "test_c01_iniciar_checkout_com_produto_no_carrinho",
-    "test_c02_avancar_com_informacao_completa_ate_resumo",
-    "test_c03_verificar_subtotal_taxa_e_total_no_resumo",
-    "test_c04_finalizar_encomenda_e_ver_confirmacao",
-    "test_c05_bloquear_avanco_sem_codigo_postal",
-    "test_c06_mostrar_apenas_primeira_mensagem_campo_em_falta"
+    "test_c01_acesso_formulario_checkout",
+    "test_c02_avanco_resumo_dados_validos",
+    "test_c03_calculo_subtotal_taxa_total",
+    "test_c04_confirmacao_encomenda",
+    "test_c05_erro_sem_codigo_postal",
+    "test_c06_erro_primeiro_nome_em_falta",
+    "test_c07_erro_sem_apelido"
   ],
   "selectors_used": [
     "add-to-cart-sauce-labs-backpack",
@@ -22,15 +23,10 @@
     "firstName",
     "inventory-item-name",
     "inventory-item-price",
-    "inventory-list",
-    "item-quantity",
     "lastName",
     "login-button",
     "password",
-    "payment-info-value",
     "postalCode",
-    "remove-sauce-labs-backpack",
-    "shipping-info-value",
     "shopping-cart-badge",
     "shopping-cart-link",
     "subtotal-label",
@@ -40,12 +36,13 @@
     "username"
   ],
   "expects_per_test": {
-    "test_c01_iniciar_checkout_com_produto_no_carrinho": 14,
-    "test_c02_avancar_com_informacao_completa_ate_resumo": 8,
-    "test_c03_verificar_subtotal_taxa_e_total_no_resumo": 7,
-    "test_c04_finalizar_encomenda_e_ver_confirmacao": 7,
-    "test_c05_bloquear_avanco_sem_codigo_postal": 7,
-    "test_c06_mostrar_apenas_primeira_mensagem_campo_em_falta": 8
+    "test_c01_acesso_formulario_checkout": 7,
+    "test_c02_avanco_resumo_dados_validos": 5,
+    "test_c03_calculo_subtotal_taxa_total": 6,
+    "test_c04_confirmacao_encomenda": 6,
+    "test_c05_erro_sem_codigo_postal": 4,
+    "test_c06_erro_primeiro_nome_em_falta": 5,
+    "test_c07_erro_sem_apelido": 4
   },
   "issues": []
 }
