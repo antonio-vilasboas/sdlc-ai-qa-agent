@@ -1,0 +1,21 @@
+{
+  "published_at": "2026-10-19T23:57:40+00:00",
+  "story": "QAAGENT-4",
+  "tests": {
+    "C01": {
+      "test_key": "QAAGENT-25",
+      "issue_id": "10124",
+      "function": "test_c01_ordenar_preco_ascendente"
+    },
+    "C02": {
+      "test_key": "QAAGENT-26",
+      "issue_id": "10125",
+      "function": "test_c02_ordenar_preco_descendente"
+    },
+    "C03": {
+      "test_key": "QAAGENT-27",
+      "issue_id": "10126",
+      "function": "test_c03_ordenar_nome_z_a"
+    }
+  }
+}

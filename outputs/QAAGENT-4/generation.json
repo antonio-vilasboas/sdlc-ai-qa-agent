@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-10-19T23:57:08+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "O cliente está autenticado na página de catálogo de produtos": [
+      9,
+      3
+    ],
+    "O cliente escolhe a ordenação \"Price (low to high)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os produtos são apresentados do mais barato para o mais caro, pela sequência de preços $7.99, $9.99, $15.99, $15.99, $29.99, $49.99": [
+      3,
+      4
+    ],
+    "A opção ativa do seletor apresenta o texto \"Price (low to high)\"": [
+      4,
+      3
+    ],
+    "A verificação incide na sequência de preços; a posição relativa entre os dois produtos de $15.99 não é validada": [
+      4,
+      6
+    ],
+    "O cliente escolhe a ordenação \"Price (high to low)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os produtos são apresentados do mais caro para o mais barato, pela sequência de preços $49.99, $29.99, $15.99, $15.99, $9.99, $7.99": [
+      3,
+      4
+    ],
+    "A opção ativa do seletor apresenta o texto \"Price (high to low)\"": [
+      4,
+      3
+    ],
+    "O cliente escolhe a ordenação \"Name (Z to A)\" no seletor de ordenação": [
+      4,
+      6
+    ],
+    "Os produtos são apresentados por ordem alfabética inversa: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack": [
+      4,
+      3
+    ],
+    "A opção ativa do seletor apresenta o texto \"Name (Z to A)\"": [
+      4,
+      6
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 6792,
+    "completion_tokens": 3761,
+    "latency_ms": 15813,
+    "cost_usd": 0.00256,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-4",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_ordenar_preco_ascendente",
+        "code": "def test_c01_ordenar_preco_ascendente(page: Page) -> None:\n    # Dado O cliente está autenticado na página de catálogo de produtos\n    # (PENDENTE: credenciais e seletores de login não constam do contexto; ver assumptions)\n    page.goto(BASE_URL + \"/inventory.html\")\n    # Quando O cliente escolhe a ordenação \"Price (low to high)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Price (low to high)')\n    # Então Os produtos são apresentados do mais barato para o mais caro, pela sequência de preços $7.99, $9.99, $15.99, $15.99, $29.99, $49.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text(['$7.99', '$9.99', '$15.99', '$15.99', '$29.99', '$49.99'])\n    # E A opção ativa do seletor apresenta o texto \"Price (low to high)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Price (low to high)')\n    # E A verificação incide na sequência de preços; a posição relativa entre os dois produtos de $15.99 não é validada\n    # (a asserção acima valida apenas a sequência de preços, conforme RN-ORD-03)"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_ordenar_preco_descendente",
+        "code": "def test_c02_ordenar_preco_descendente(page: Page) -> None:\n    # Dado O cliente está autenticado na página de catálogo de produtos\n    # (PENDENTE: credenciais e seletores de login não constam do contexto; ver assumptions)\n    page.goto(BASE_URL + \"/inventory.html\")\n    # Quando O cliente escolhe a ordenação \"Price (high to low)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Price (high to low)')\n    # Então Os produtos são apresentados do mais caro para o mais barato, pela sequência de preços $49.99, $29.99, $15.99, $15.99, $9.99, $7.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text(['$49.99', '$29.99', '$15.99', '$15.99', '$9.99', '$7.99'])\n    # E A opção ativa do seletor apresenta o texto \"Price (high to low)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Price (high to low)')\n    # E A verificação incide na sequência de preços; a posição relativa entre os dois produtos de $15.99 não é validada\n    # (a asserção acima valida apenas a sequência de preços, conforme RN-ORD-03)"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_ordenar_nome_z_a",
+        "code": "def test_c03_ordenar_nome_z_a(page: Page) -> None:\n    # Dado O cliente está autenticado na página de catálogo de produtos\n    # (PENDENTE: credenciais e seletores de login não constam do contexto; ver assumptions)\n    page.goto(BASE_URL + \"/inventory.html\")\n    # Quando O cliente escolhe a ordenação \"Name (Z to A)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Name (Z to A)')\n    # Então Os produtos são apresentados por ordem alfabética inversa: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(['Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Onesie', 'Sauce Labs Fleece Jacket', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Bike Light', 'Sauce Labs Backpack'])\n    # E A opção ativa do seletor apresenta o texto \"Name (Z to A)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Name (Z to A)')"
+      }
+    ],
+    "assumptions": [
+      "BLOQUEIO: o contexto não contém credenciais de login nem os seletores do formulário de autenticação (utilizador, palavra-passe, botão de login), pelo que o passo 'Dado O cliente está autenticado' não está implementado com dados reais. Sem autenticação, os testes são redirecionados para '/' e vão falhar. Para os completar é necessário fornecer as credenciais de teste e os seletores data-test da página de login, ou uma autenticação partilhada aprovada.",
+      "Os testes C01 e C02 usam select_option(label=...) com o texto visível da opção, conforme a tabela de ordenação (valores lohi/hilo equivalentes); a seleção é feita pelo texto para cumprir o cenário.",
+      "Em C01 e C02 a sequência de preços é validada com to_have_text sobre a lista completa de preços, sem tratar a posição relativa entre os dois produtos de $15.99 (RN-ORD-03)."
+    ]
+  }
+}
