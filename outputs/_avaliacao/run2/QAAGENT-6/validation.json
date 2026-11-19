@@ -1,0 +1,49 @@
+{
+  "validated_at": "2026-10-11T15:32:48+00:00",
+  "file": "test_qaagent_6.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_iniciar_checkout",
+    "test_c02_formulario_para_resumo",
+    "test_c03_subtotal_taxa_total",
+    "test_c04_finalizar_confirmacao",
+    "test_c05_bloqueia_sem_codigo_postal"
+  ],
+  "selectors_used": [
+    "add-to-cart-sauce-labs-backpack",
+    "checkout",
+    "complete-header",
+    "complete-text",
+    "continue",
+    "error",
+    "finish",
+    "firstName",
+    "inventory-item-name",
+    "inventory-item-price",
+    "inventory-list",
+    "item-quantity",
+    "lastName",
+    "login-button",
+    "password",
+    "payment-info-value",
+    "postalCode",
+    "remove-sauce-labs-backpack",
+    "shipping-info-value",
+    "shopping-cart-badge",
+    "shopping-cart-link",
+    "subtotal-label",
+    "tax-label",
+    "title",
+    "total-label",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_iniciar_checkout": 10,
+    "test_c02_formulario_para_resumo": 11,
+    "test_c03_subtotal_taxa_total": 7,
+    "test_c04_finalizar_confirmacao": 8,
+    "test_c05_bloqueia_sem_codigo_postal": 10
+  },
+  "issues": []
+}

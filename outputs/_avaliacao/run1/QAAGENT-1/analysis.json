@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-10-11T15:23:48+00:00",
+  "story_summary": "Autenticação de utilizador com credenciais válidas",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    9,
+    3,
+    8
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4754,
+    "completion_tokens": 1994,
+    "latency_ms": 9128,
+    "cost_usd": 0.001472,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-1",
+    "summary": "Validar que um cliente registado com credenciais válidas é autenticado, chega ao catálogo de produtos e vê o título e a lista de produtos disponíveis.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Login com credenciais válidas redireciona para o catálogo",
+        "type": "nominal",
+        "given": [
+          "Estou na página de login da loja Swag Labs"
+        ],
+        "when": [
+          "Introduzo o utilizador válido standard_user",
+          "Introduzo a password secret_sauce",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "Sou redirecionado para a página de catálogo de produtos (/inventory.html)",
+          "O utilizador deixa de ver a página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "url_destino": "/inventory.html"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Título da secção de produtos visível após login",
+        "type": "nominal",
+        "given": [
+          "Estou na página de login da loja Swag Labs"
+        ],
+        "when": [
+          "Introduzo o utilizador válido standard_user",
+          "Introduzo a password secret_sauce",
+          "Submeto o formulário de login",
+          "Chego à página de catálogo de produtos"
+        ],
+        "then": [
+          "O título da página de catálogo é visível com o texto \"Products\""
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "titulo_esperado": "Products"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Lista de produtos disponíveis apresentada após login",
+        "type": "nominal",
+        "given": [
+          "Estou na página de login da loja Swag Labs"
+        ],
+        "when": [
+          "Introduzo o utilizador válido standard_user",
+          "Introduzo a password secret_sauce",
+          "Submeto o formulário de login",
+          "Chego à página de catálogo de produtos"
+        ],
+        "then": [
+          "É apresentada a lista de produtos com 6 produtos",
+          "Cada produto apresenta nome e preço",
+          "Os produtos apresentados são: Sauce Labs Backpack ($29.99), Sauce Labs Bike Light ($9.99), Sauce Labs Bolt T-Shirt ($15.99), Sauce Labs Fleece Jacket ($49.99), Sauce Labs Onesie ($7.99) e Test.allTheThings() T-Shirt (Red) ($15.99)"
+        ],
+        "rules": [
+          "RN-LOGIN-01"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "numero_produtos": "6",
+          "produtos": "Sauce Labs Backpack ($29.99); Sauce Labs Bike Light ($9.99); Sauce Labs Bolt T-Shirt ($15.99); Sauce Labs Fleece Jacket ($49.99); Sauce Labs Onesie ($7.99); Test.allTheThings() T-Shirt (Red) ($15.99)"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}

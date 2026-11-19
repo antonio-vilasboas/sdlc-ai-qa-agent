@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-10-11T15:24:33+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    4,
+    6,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "Estou na página de login da loja": [
+      1,
+      9
+    ],
+    "Introduzo o utilizador de teste de conta bloqueada e a password de teste": [
+      1,
+      2
+    ],
+    "Submeto o formulário de login": [
+      2,
+      1
+    ],
+    "O acesso à loja é recusado": [
+      1,
+      9
+    ],
+    "Permaneço na página de login (/)": [
+      1,
+      2
+    ],
+    "Não sou redirecionado para o catálogo de produtos": [
+      4,
+      9
+    ],
+    "É apresentada uma mensagem de erro": [
+      6,
+      1
+    ],
+    "A mensagem de erro apresentada é exatamente \"Epic sadface: Sorry, this user has been locked out.\"": [
+      1,
+      2
+    ],
+    "Permaneço na página de login": [
+      1,
+      2
+    ],
+    "Tentei iniciar sessão com o utilizador de teste de conta bloqueada e a password de teste": [
+      1,
+      2
+    ],
+    "A mensagem de conta bloqueada está apresentada": [
+      1,
+      6
+    ],
+    "Fecho a mensagem de erro através do botão de fecho": [
+      6,
+      2
+    ],
+    "A mensagem de erro deixa de ser apresentada": [
+      6,
+      1
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 5250,
+    "completion_tokens": 2520,
+    "latency_ms": 8607,
+    "cost_usd": 0.001785,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-2",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_acesso_recusado_conta_bloqueada",
+        "code": "def test_c01_acesso_recusado_conta_bloqueada(page: Page) -> None:\n    # Dado Estou na página de login da loja\n    page.goto(BASE_URL + \"/\")\n    # Quando Introduzo o utilizador de teste de conta bloqueada e a password de teste\n    page.locator('[data-test=\"username\"]').fill(\"locked_out_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    # E Submeto o formulário de login\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então O acesso à loja é recusado\n    expect(page.locator('[data-test=\"error\"]')).to_be_visible()\n    # E Permaneço na página de login (/)\n    expect(page).to_have_url(BASE_URL + \"/\")\n    # E Não sou redirecionado para o catálogo de produtos\n    expect(page).not_to_have_url(BASE_URL + \"/inventory.html\")"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_mensagem_conta_bloqueada_login",
+        "code": "def test_c02_mensagem_conta_bloqueada_login(page: Page) -> None:\n    # Dado Estou na página de login da loja\n    page.goto(BASE_URL + \"/\")\n    # Quando Introduzo o utilizador de teste de conta bloqueada e a password de teste\n    page.locator('[data-test=\"username\"]').fill(\"locked_out_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    # E Submeto o formulário de login\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então É apresentada uma mensagem de erro\n    expect(page.locator('[data-test=\"error\"]')).to_be_visible()\n    # E A mensagem de erro apresentada é exatamente \"Epic sadface: Sorry, this user has been locked out.\"\n    expect(page.locator('[data-test=\"error\"]')).to_have_text(\"Epic sadface: Sorry, this user has been locked out.\")\n    # E Permaneço na página de login\n    expect(page).to_have_url(BASE_URL + \"/\")"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_fecho_mensagem_conta_bloqueada",
+        "code": "def test_c03_fecho_mensagem_conta_bloqueada(page: Page) -> None:\n    # Dado Estou na página de login da loja\n    page.goto(BASE_URL + \"/\")\n    # E Tentei iniciar sessão com o utilizador de teste de conta bloqueada e a password de teste\n    page.locator('[data-test=\"username\"]').fill(\"locked_out_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    # E A mensagem de conta bloqueada está apresentada\n    expect(page.locator('[data-test=\"error\"]')).to_have_text(\"Epic sadface: Sorry, this user has been locked out.\")\n    # Quando Fecho a mensagem de erro através do botão de fecho\n    page.locator('[data-test=\"error-button\"]').click()\n    # Então A mensagem de erro deixa de ser apresentada\n    expect(page.locator('[data-test=\"error\"]')).to_have_count(0)\n    # E Permaneço na página de login\n    expect(page).to_have_url(BASE_URL + \"/\")"
+      }
+    ],
+    "assumptions": []
+  }
+}

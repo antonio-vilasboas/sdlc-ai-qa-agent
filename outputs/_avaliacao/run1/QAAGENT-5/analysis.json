@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-10-11T15:27:41+00:00",
+  "story_summary": "Gestão de artigos no carrinho de compras",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    5,
+    3,
+    8,
+    1,
+    7
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4787,
+    "completion_tokens": 2719,
+    "latency_ms": 10380,
+    "cost_usd": 0.001838,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-5",
+    "summary": "Validar que o cliente autenticado consegue adicionar e remover artigos do carrinho, e que o contador e a lista do carrinho refletem essas alterações.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Adicionar um produto ao carrinho atualiza o contador para 1",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado na loja como cliente padrão",
+          "O utilizador está na página de catálogo de produtos",
+          "O carrinho está vazio"
+        ],
+        "when": [
+          "O utilizador adiciona o produto Sauce Labs Backpack ao carrinho"
+        ],
+        "then": [
+          "O contador do carrinho no cabeçalho é apresentado com o valor 1",
+          "O botão de adicionar do produto é substituído por um botão de remover"
+        ],
+        "rules": [
+          "RN-CART-01",
+          "RN-CART-03",
+          "RN-CART-05"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "produto": "Sauce Labs Backpack",
+          "preço": "$29.99",
+          "valor_esperado_contador": "1"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Adicionar um segundo produto atualiza o contador para 2",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado na loja como cliente padrão",
+          "O utilizador está na página de catálogo com o produto Sauce Labs Backpack já adicionado ao carrinho"
+        ],
+        "when": [
+          "O utilizador adiciona o produto Sauce Labs Bike Light ao carrinho"
+        ],
+        "then": [
+          "O contador do carrinho no cabeçalho é apresentado com o valor 2",
+          "O botão de remover é apresentado para o produto Sauce Labs Bike Light"
+        ],
+        "rules": [
+          "RN-CART-01",
+          "RN-CART-03",
+          "RN-CART-05"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "produto_1": "Sauce Labs Backpack",
+          "produto_2": "Sauce Labs Bike Light",
+          "preço_produto_2": "$9.99",
+          "valor_esperado_contador": "2"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Carrinho apresenta os dois produtos adicionados",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado na loja como cliente padrão",
+          "O utilizador adicionou os produtos Sauce Labs Backpack e Sauce Labs Bike Light ao carrinho"
+        ],
+        "when": [
+          "O utilizador abre o carrinho através do ícone do carrinho no cabeçalho"
+        ],
+        "then": [
+          "A página do carrinho apresenta o título \"Your Cart\"",
+          "São apresentados exatamente dois artigos: Sauce Labs Backpack e Sauce Labs Bike Light",
+          "Cada artigo apresenta o preço correspondente ($29.99 e $9.99) e quantidade 1",
+          "O contador do carrinho no cabeçalho continua a indicar 2"
+        ],
+        "rules": [
+          "RN-CART-01",
+          "RN-CART-05"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "título_página": "Your Cart",
+          "produto_1": "Sauce Labs Backpack",
+          "preço_produto_1": "$29.99",
+          "produto_2": "Sauce Labs Bike Light",
+          "preço_produto_2": "$9.99",
+          "quantidade_esperada": "1",
+          "valor_esperado_contador": "2"
+        }
+      },
+      {
+        "id": "C04",
+        "title": "Remover um produto no carrinho retira-o da lista e atualiza o contador para 1",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado na loja como cliente padrão",
+          "O utilizador tem os produtos Sauce Labs Backpack e Sauce Labs Bike Light no carrinho"
+        ],
+        "when": [
+          "O utilizador abre o carrinho",
+          "O utilizador remove o produto Sauce Labs Bike Light do carrinho"
+        ],
+        "then": [
+          "O produto Sauce Labs Bike Light deixa de ser apresentado na lista do carrinho",
+          "O produto Sauce Labs Backpack continua apresentado no carrinho",
+          "O contador do carrinho no cabeçalho passa a indicar 1"
+        ],
+        "rules": [
+          "RN-CART-04",
+          "RN-CART-01"
+        ],
+        "criteria": [
+          4
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "produto_removido": "Sauce Labs Bike Light",
+          "produto_mantido": "Sauce Labs Backpack",
+          "valor_esperado_contador": "1"
+        }
+      },
+      {
+        "id": "C05",
+        "title": "Contador deixa de ser apresentado quando o carrinho fica vazio",
+        "type": "exceção",
+        "given": [
+          "O utilizador está autenticado na loja como cliente padrão",
+          "O utilizador tem apenas o produto Sauce Labs Backpack no carrinho"
+        ],
+        "when": [
+          "O utilizador abre o carrinho",
+          "O utilizador remove o produto Sauce Labs Backpack do carrinho"
+        ],
+        "then": [
+          "A lista do carrinho fica sem artigos",
+          "O contador do carrinho deixa de ser apresentado no cabeçalho"
+        ],
+        "rules": [
+          "RN-CART-02",
+          "RN-CART-04"
+        ],
+        "criteria": [
+          4
+        ],
+        "test_data": {
+          "utilizador": "standard_user",
+          "password": "secret_sauce",
+          "produto_removido": "Sauce Labs Backpack"
+        }
+      }
+    ],
+    "gaps": [
+      "Não está especificado o estado do botão de adicionar no catálogo para um produto após ser removido do carrinho."
+    ]
+  }
+}

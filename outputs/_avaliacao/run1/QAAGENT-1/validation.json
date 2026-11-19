@@ -1,0 +1,27 @@
+{
+  "validated_at": "2026-10-11T15:24:10+00:00",
+  "file": "test_qaagent_1.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_login_valido_redireciona_catalogo",
+    "test_c02_titulo_produtos_visivel_apos_login",
+    "test_c03_lista_produtos_disponiveis_apos_login"
+  ],
+  "selectors_used": [
+    "inventory-item",
+    "inventory-item-name",
+    "inventory-item-price",
+    "inventory-list",
+    "login-button",
+    "password",
+    "title",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_login_valido_redireciona_catalogo": 2,
+    "test_c02_titulo_produtos_visivel_apos_login": 3,
+    "test_c03_lista_produtos_disponiveis_apos_login": 7
+  },
+  "issues": []
+}

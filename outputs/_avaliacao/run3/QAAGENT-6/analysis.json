@@ -1,0 +1,199 @@
+{
+  "generated_at": "2026-10-11T15:35:47+00:00",
+  "story_summary": "[E2E] Finalização de encomenda (checkout completo)",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    8,
+    6,
+    7,
+    5,
+    3
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 5182,
+    "completion_tokens": 3475,
+    "latency_ms": 14199,
+    "cost_usd": 0.002256,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-6",
+    "summary": "Validar o fluxo ponta a ponta de checkout, desde a adição de um produto ao carrinho até à confirmação da encomenda, incluindo o resumo com subtotal, taxa e total e a validação obrigatória do código postal.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Abrir o formulário de informação do cliente a partir do carrinho",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado com um utilizador válido",
+          "O carrinho está vazio"
+        ],
+        "when": [
+          "Adiciona o produto Sauce Labs Backpack ao carrinho",
+          "Abre o carrinho",
+          "Inicia o checkout"
+        ],
+        "then": [
+          "É apresentado o título da página de informação do cliente",
+          "O botão do produto passa a ser o de remover do carrinho",
+          "O contador do carrinho indica 1 produto",
+          "O formulário apresenta os campos primeiro nome, apelido e código postal"
+        ],
+        "rules": [
+          "RN-CART-01",
+          "RN-CART-03",
+          "RN-CART-05",
+          "RN-CHK-01"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "produto": "Sauce Labs Backpack",
+          "preço do produto": "$29.99",
+          "título esperado": "Checkout: Your Information",
+          "quantidade no carrinho": "1"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Avançar para o resumo da encomenda com o produto escolhido",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado com um utilizador válido",
+          "O produto Sauce Labs Backpack está no carrinho",
+          "O utilizador está no formulário de informação do cliente"
+        ],
+        "when": [
+          "Preenche o primeiro nome, o apelido e o código postal",
+          "Continua"
+        ],
+        "then": [
+          "É apresentado o título do resumo da encomenda",
+          "O resumo apresenta o artigo Sauce Labs Backpack",
+          "O resumo apresenta o preço $29.99 do artigo",
+          "O resumo apresenta a informação de pagamento SauceCard #31337",
+          "O resumo apresenta a informação de envio Free Pony Express Delivery!"
+        ],
+        "rules": [
+          "RN-CHK-01",
+          "RN-CHK-03"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "produto": "Sauce Labs Backpack",
+          "preço do artigo": "$29.99",
+          "título esperado": "Checkout: Overview",
+          "informação de pagamento": "SauceCard #31337",
+          "informação de envio": "Free Pony Express Delivery!"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Verificar subtotal, taxa e total no resumo da encomenda",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado com um utilizador válido",
+          "O produto Sauce Labs Backpack está no carrinho",
+          "O utilizador está no resumo da encomenda com o produto Sauce Labs Backpack"
+        ],
+        "when": [
+          "Lê os valores de subtotal, taxa e total apresentados"
+        ],
+        "then": [
+          "O subtotal apresentado é $29.99",
+          "A taxa apresentada é $2.40",
+          "O total apresentado é $32.39",
+          "O total é igual à soma do subtotal com a taxa"
+        ],
+        "rules": [
+          "RN-CHK-03",
+          "RN-CHK-04",
+          "RN-CHK-05"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "subtotal esperado": "Item total: $29.99",
+          "taxa esperada": "Tax: $2.40",
+          "total esperado": "Total: $32.39"
+        }
+      },
+      {
+        "id": "C04",
+        "title": "Finalizar a encomenda e ver a confirmação",
+        "type": "nominal",
+        "given": [
+          "O utilizador está autenticado com um utilizador válido",
+          "O produto Sauce Labs Backpack está no carrinho",
+          "O utilizador está no resumo da encomenda"
+        ],
+        "when": [
+          "Finaliza a encomenda"
+        ],
+        "then": [
+          "É apresentado o cabeçalho de confirmação Thank you for your order!",
+          "É apresentado o texto Your order has been dispatched, and will arrive just as fast as the pony can get there!",
+          "O contador do carrinho deixa de ser apresentado"
+        ],
+        "rules": [
+          "RN-CHK-06",
+          "RN-CART-02"
+        ],
+        "criteria": [
+          4
+        ],
+        "test_data": {
+          "cabeçalho esperado": "Thank you for your order!",
+          "texto esperado": "Your order has been dispatched, and will arrive just as fast as the pony can get there!",
+          "produto": "Sauce Labs Backpack"
+        }
+      },
+      {
+        "id": "C05",
+        "title": "Impedir avanço sem código postal",
+        "type": "validação",
+        "given": [
+          "O utilizador está autenticado com um utilizador válido",
+          "O produto Sauce Labs Backpack está no carrinho",
+          "O utilizador está no formulário de informação do cliente"
+        ],
+        "when": [
+          "Preenche o primeiro nome e o apelido",
+          "Deixa o código postal em branco",
+          "Continua"
+        ],
+        "then": [
+          "É apresentada a mensagem de erro Error: Postal Code is required",
+          "Não é apresentado o resumo da encomenda",
+          "O utilizador permanece no formulário de informação do cliente"
+        ],
+        "rules": [
+          "RN-CHK-01",
+          "RN-CHK-02"
+        ],
+        "criteria": [
+          5
+        ],
+        "test_data": {
+          "mensagem de erro esperada": "Error: Postal Code is required",
+          "título da página": "Checkout: Your Information"
+        }
+      }
+    ],
+    "gaps": [
+      "Credenciais de um utilizador válido para autenticação não estão definidas no contexto",
+      "Valores concretos de primeiro nome, apelido e código postal a usar nos cenários C02, C04 e C05 não estão definidos",
+      "Comportamento da autenticação e da adição ao carrinho descrito nas User Stories US-01 e US-05 não está disponível no contexto"
+    ]
+  }
+}

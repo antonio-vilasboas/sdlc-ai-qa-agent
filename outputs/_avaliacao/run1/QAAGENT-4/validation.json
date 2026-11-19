@@ -1,0 +1,48 @@
+{
+  "validated_at": "2026-10-11T15:25:55+00:00",
+  "file": "test_qaagent_4.py",
+  "allowed_selectors": 52,
+  "approved": false,
+  "tests": [
+    "test_c01_ordenar_preco_ascendente",
+    "test_c02_ordenar_preco_descendente",
+    "test_c03_ordenar_nome_z_a"
+  ],
+  "selectors_used": [
+    "active-option",
+    "inventory-item",
+    "inventory-item-name",
+    "inventory-item-price",
+    "login-button",
+    "password",
+    "product-sort-container"
+  ],
+  "expects_per_test": {
+    "test_c01_ordenar_preco_ascendente": 4,
+    "test_c02_ordenar_preco_descendente": 4,
+    "test_c03_ordenar_nome_z_a": 4
+  },
+  "issues": [
+    {
+      "rule": "V4",
+      "severity": "erro",
+      "test": "test_c01_ordenar_preco_ascendente",
+      "line": 16,
+      "message": "seletor inexistente na base de conhecimento: 'user-name'"
+    },
+    {
+      "rule": "V4",
+      "severity": "erro",
+      "test": "test_c02_ordenar_preco_descendente",
+      "line": 33,
+      "message": "seletor inexistente na base de conhecimento: 'user-name'"
+    },
+    {
+      "rule": "V4",
+      "severity": "erro",
+      "test": "test_c03_ordenar_nome_z_a",
+      "line": 50,
+      "message": "seletor inexistente na base de conhecimento: 'user-name'"
+    }
+  ]
+}

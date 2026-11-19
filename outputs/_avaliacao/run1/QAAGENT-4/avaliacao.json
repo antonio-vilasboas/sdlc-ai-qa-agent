@@ -1,0 +1,14 @@
+{
+  "story": "QAAGENT-4",
+  "run": 1,
+  "pipeline_exit": 1,
+  "pytest": {
+    "total": 3,
+    "passed": 0,
+    "failed": {
+      "test_c01_ordenar_preco_ascendente": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\nwaiting for locator(\"[data-test=\\\"user-name\\\"]\")",
+      "test_c02_ordenar_preco_descendente": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\nwaiting for locator(\"[data-test=\\\"user-name\\\"]\")",
+      "test_c03_ordenar_nome_z_a": "playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.\nCall log:\nwaiting for locator(\"[data-test=\\\"user-name\\\"]\")"
+    }
+  }
+}

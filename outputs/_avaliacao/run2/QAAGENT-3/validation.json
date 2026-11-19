@@ -1,0 +1,21 @@
+{
+  "validated_at": "2026-10-11T15:30:10+00:00",
+  "file": "test_qaagent_3.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_login_sem_campos_obrigatorios",
+    "test_c02_login_sem_password"
+  ],
+  "selectors_used": [
+    "error",
+    "login-button",
+    "password",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_login_sem_campos_obrigatorios": 6,
+    "test_c02_login_sem_password": 6
+  },
+  "issues": []
+}

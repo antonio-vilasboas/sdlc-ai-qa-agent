@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-10-11T15:35:27+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "step_retrieval": {
+    "Estou autenticado na loja como cliente standard_user": [
+      1,
+      2
+    ],
+    "Estou na página de catálogo de produtos": [
+      3,
+      4
+    ],
+    "O carrinho está vazio e o contador do carrinho não é apresentado": [
+      5,
+      8
+    ],
+    "Adiciono o produto Sauce Labs Backpack ao carrinho": [
+      3,
+      5
+    ],
+    "O produto Sauce Labs Backpack passa a ser apresentado com a opção de remover, no lugar da opção de adicionar": [
+      3,
+      4
+    ],
+    "O contador do carrinho no cabeçalho passa a indicar 1": [
+      5,
+      6
+    ],
+    "Já adicionei o produto Sauce Labs Backpack ao carrinho e o contador indica 1": [
+      3,
+      5
+    ],
+    "Adiciono o produto Sauce Labs Bike Light ao carrinho": [
+      3,
+      5
+    ],
+    "O produto Sauce Labs Bike Light passa a ser apresentado com a opção de remover": [
+      3,
+      4
+    ],
+    "O contador do carrinho no cabeçalho passa a indicar 2": [
+      5,
+      8
+    ],
+    "Adicionei os produtos Sauce Labs Backpack e Sauce Labs Bike Light ao carrinho": [
+      3,
+      8
+    ],
+    "O contador do carrinho indica 2": [
+      5,
+      8
+    ],
+    "Abro o carrinho através do ícone do carrinho no cabeçalho": [
+      3,
+      5
+    ],
+    "É apresentada a página do carrinho com o título \"Your Cart\"": [
+      5,
+      3
+    ],
+    "São apresentados os dois produtos adicionados: Sauce Labs Backpack com preço $29.99 e Sauce Labs Bike Light com preço $9.99": [
+      3,
+      4
+    ],
+    "Cada produto apresentado tem quantidade 1": [
+      3,
+      8
+    ],
+    "Estou na página do carrinho com os dois produtos apresentados": [
+      5,
+      3
+    ],
+    "Removo o produto Sauce Labs Backpack no carrinho": [
+      3,
+      5
+    ],
+    "O produto Sauce Labs Backpack deixa de ser apresentado na lista do carrinho": [
+      3,
+      5
+    ],
+    "O produto Sauce Labs Bike Light continua a ser apresentado na lista do carrinho": [
+      3,
+      5
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 7537,
+    "completion_tokens": 6358,
+    "latency_ms": 21264,
+    "cost_usd": 0.003933,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-5",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_adicionar_primeiro_artigo",
+        "code": "def test_c01_adicionar_primeiro_artigo(page: Page) -> None:\n    # Dado Estou autenticado na loja como cliente standard_user\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E Estou na página de catálogo de produtos\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    # E O carrinho está vazio e o contador do carrinho não é apresentado\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_count(0)\n    # Quando Adiciono o produto Sauce Labs Backpack ao carrinho\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    # Então O produto Sauce Labs Backpack passa a ser apresentado com a opção de remover, no lugar da opção de adicionar\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    expect(page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]')).to_have_count(0)\n    # E O contador do carrinho no cabeçalho passa a indicar 1\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"1\")"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_adicionar_segundo_artigo",
+        "code": "def test_c02_adicionar_segundo_artigo(page: Page) -> None:\n    # Dado Estou autenticado na loja como cliente standard_user\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E Estou na página de catálogo de produtos\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    # E Já adicionei o produto Sauce Labs Backpack ao carrinho e o contador indica 1\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"1\")\n    # Quando Adiciono o produto Sauce Labs Bike Light ao carrinho\n    page.locator('[data-test=\"add-to-cart-sauce-labs-bike-light\"]').click()\n    # Então O produto Sauce Labs Bike Light passa a ser apresentado com a opção de remover\n    expect(page.locator('[data-test=\"remove-sauce-labs-bike-light\"]')).to_be_visible()\n    expect(page.locator('[data-test=\"add-to-cart-sauce-labs-bike-light\"]')).to_have_count(0)\n    # E O contador do carrinho no cabeçalho passa a indicar 2\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"2\")"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_abrir_carrinho_com_dois_artigos",
+        "code": "def test_c03_abrir_carrinho_com_dois_artigos(page: Page) -> None:\n    # Dado Estou autenticado na loja como cliente standard_user\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E Adicionei os produtos Sauce Labs Backpack e Sauce Labs Bike Light ao carrinho\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    page.locator('[data-test=\"add-to-cart-sauce-labs-bike-light\"]').click()\n    # E O contador do carrinho indica 2\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"2\")\n    # Quando Abro o carrinho através do ícone do carrinho no cabeçalho\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    # Então É apresentada a página do carrinho com o título \"Your Cart\"\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Your Cart\")\n    # E São apresentados os dois produtos adicionados: Sauce Labs Backpack com preço $29.99 e Sauce Labs Bike Light com preço $9.99\n    items = page.locator('[data-test=\"inventory-item\"]')\n    expect(items).to_have_count(2)\n    backpack = items.filter(has_text=\"Sauce Labs Backpack\")\n    bike_light = items.filter(has_text=\"Sauce Labs Bike Light\")\n    expect(backpack.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    expect(backpack.locator('[data-test=\"inventory-item-price\"]')).to_have_text(\"$29.99\")\n    expect(bike_light.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Bike Light\")\n    expect(bike_light.locator('[data-test=\"inventory-item-price\"]')).to_have_text(\"$9.99\")\n    # E Cada produto apresentado tem quantidade 1\n    expect(backpack.locator('[data-test=\"item-quantity\"]')).to_have_text(\"1\")\n    expect(bike_light.locator('[data-test=\"item-quantity\"]')).to_have_text(\"1\")"
+      },
+      {
+        "scenario_id": "C04",
+        "function_name": "test_c04_remover_artigo_do_carrinho",
+        "code": "def test_c04_remover_artigo_do_carrinho(page: Page) -> None:\n    # Dado Estou autenticado na loja como cliente standard_user\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E Adicionei os produtos Sauce Labs Backpack e Sauce Labs Bike Light ao carrinho\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    page.locator('[data-test=\"add-to-cart-sauce-labs-bike-light\"]').click()\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"2\")\n    # E Estou na página do carrinho com os dois produtos apresentados\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    items = page.locator('[data-test=\"inventory-item\"]')\n    expect(items).to_have_count(2)\n    # Quando Removo o produto Sauce Labs Backpack no carrinho\n    page.locator('[data-test=\"remove-sauce-labs-backpack\"]').click()\n    # Então O produto Sauce Labs Backpack deixa de ser apresentado na lista do carrinho\n    expect(items.filter(has_text=\"Sauce Labs Backpack\")).to_have_count(0)\n    # E O produto Sauce Labs Bike Light continua a ser apresentado na lista do carrinho\n    expect(items.filter(has_text=\"Sauce Labs Bike Light\")).to_have_count(1)\n    # E O contador do carrinho no cabeçalho passa a indicar 1\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"1\")"
+      }
+    ],
+    "assumptions": []
+  }
+}

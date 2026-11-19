@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-10-11T15:34:29+00:00",
+  "story_summary": "Ordenação de produtos no catálogo",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    4,
+    3,
+    8,
+    5,
+    7
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4931,
+    "completion_tokens": 2961,
+    "latency_ms": 11966,
+    "cost_usd": 0.001974,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-4",
+    "summary": "Validar que o seletor de ordenação do catálogo reordena corretamente os seis produtos por preço ascendente, preço descendente e nome descendente, e que a opção ativa é apresentada.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Ordenar produtos por preço ascendente",
+        "type": "nominal",
+        "given": [
+          "Estou autenticado na loja Swag Labs e na página de catálogo de produtos"
+        ],
+        "when": [
+          "Escolho a ordenação \"Price (low to high)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados do mais barato para o mais caro, com os preços por ordem crescente: $7.99, $9.99, $15.99, $15.99, $29.99, $49.99",
+          "A opção ativa do seletor é \"Price (low to high)\"",
+          "A verificação incide sobre a sequência de preços e não sobre a posição relativa dos produtos com o mesmo preço de $15.99"
+        ],
+        "rules": [
+          "RN-ORD-02",
+          "RN-ORD-03"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "Cliente autenticado (credenciais não especificadas no contexto)",
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Price (low to high)",
+          "opcao_ativa_esperada": "Price (low to high)",
+          "precos_esperados_ordem": "$7.99, $9.99, $15.99, $15.99, $29.99, $49.99"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Ordenar produtos por preço descendente",
+        "type": "nominal",
+        "given": [
+          "Estou autenticado na loja Swag Labs e na página de catálogo de produtos"
+        ],
+        "when": [
+          "Escolho a ordenação \"Price (high to low)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados do mais caro para o mais barato, com os preços por ordem decrescente: $49.99, $29.99, $15.99, $15.99, $9.99, $7.99",
+          "A opção ativa do seletor é \"Price (high to low)\"",
+          "A verificação incide sobre a sequência de preços e não sobre a posição relativa dos produtos com o mesmo preço de $15.99"
+        ],
+        "rules": [
+          "RN-ORD-02",
+          "RN-ORD-03"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "Cliente autenticado (credenciais não especificadas no contexto)",
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Price (high to low)",
+          "opcao_ativa_esperada": "Price (high to low)",
+          "precos_esperados_ordem": "$49.99, $29.99, $15.99, $15.99, $9.99, $7.99"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Ordenar produtos por nome descendente (Z a A)",
+        "type": "nominal",
+        "given": [
+          "Estou autenticado na loja Swag Labs e na página de catálogo de produtos"
+        ],
+        "when": [
+          "Escolho a ordenação \"Name (Z to A)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados por ordem alfabética inversa: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack",
+          "A opção ativa do seletor é \"Name (Z to A)\""
+        ],
+        "rules": [
+          "RN-ORD-02"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "Cliente autenticado (credenciais não especificadas no contexto)",
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Name (Z to A)",
+          "opcao_ativa_esperada": "Name (Z to A)",
+          "nomes_esperados_ordem": "Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack"
+        }
+      }
+    ],
+    "gaps": [
+      "Credenciais e procedimento de autenticação do cliente necessários para cumprir a pré-condição \"estou autenticado\" não estão especificados no contexto",
+      "Regras de negócio de autenticação (RN-LOGIN-...) não estão disponíveis no contexto"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "validated_at": "2026-10-11T15:24:33+00:00",
+  "file": "test_qaagent_2.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_acesso_recusado_conta_bloqueada",
+    "test_c02_mensagem_conta_bloqueada_login",
+    "test_c03_fecho_mensagem_conta_bloqueada"
+  ],
+  "selectors_used": [
+    "error",
+    "error-button",
+    "login-button",
+    "password",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_acesso_recusado_conta_bloqueada": 3,
+    "test_c02_mensagem_conta_bloqueada_login": 3,
+    "test_c03_fecho_mensagem_conta_bloqueada": 3
+  },
+  "issues": []
+}

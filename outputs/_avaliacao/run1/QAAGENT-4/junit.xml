@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="91.736" timestamp="2026-10-11T16:25:55.902648+01:00" hostname="Antnio"><testcase classname="outputs._avaliacao.run1.QAAGENT-4.test_qaagent_4" name="test_c01_ordenar_preco_ascendente[chromium]" time="30.833"><failure message="playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.&#10;Call log:&#10;waiting for locator(&quot;[data-test=\&quot;user-name\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c01_ordenar_preco_ascendente(page: Page) -&gt; None:
+        # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos
+        page.goto(BASE_URL + "/")
+&gt;       page.locator('[data-test="user-name"]').fill("standard_user")
+
+outputs/_avaliacao/run1/QAAGENT-4/test_qaagent_4.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15743: in fill
+    self._sync(
+venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:208: in fill
+    return await self._frame.fill(self._selector, strict=True, **params)
+venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:527: in fill
+    await self._channel.send("fill", locals_to_params(locals()))
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:59: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;playwright._impl._connection.Connection object at 0x75ee17907c50&gt;
+cb = &lt;function Channel.send.&lt;locals&gt;.&lt;lambda&gt; at 0x75ee162440e0&gt;
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -&gt; Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+&gt;           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.
+E           Call log:
+E           waiting for locator("[data-test=\"user-name\"]")
+
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:520: TimeoutError</failure></testcase><testcase classname="outputs._avaliacao.run1.QAAGENT-4.test_qaagent_4" name="test_c02_ordenar_preco_descendente[chromium]" time="30.289"><failure message="playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.&#10;Call log:&#10;waiting for locator(&quot;[data-test=\&quot;user-name\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c02_ordenar_preco_descendente(page: Page) -&gt; None:
+        # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos
+        page.goto(BASE_URL + "/")
+&gt;       page.locator('[data-test="user-name"]').fill("standard_user")
+
+outputs/_avaliacao/run1/QAAGENT-4/test_qaagent_4.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15743: in fill
+    self._sync(
+venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:208: in fill
+    return await self._frame.fill(self._selector, strict=True, **params)
+venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:527: in fill
+    await self._channel.send("fill", locals_to_params(locals()))
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:59: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;playwright._impl._connection.Connection object at 0x75ee17907c50&gt;
+cb = &lt;function Channel.send.&lt;locals&gt;.&lt;lambda&gt; at 0x75ee16502f20&gt;
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -&gt; Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+&gt;           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.
+E           Call log:
+E           waiting for locator("[data-test=\"user-name\"]")
+
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:520: TimeoutError</failure></testcase><testcase classname="outputs._avaliacao.run1.QAAGENT-4.test_qaagent_4" name="test_c03_ordenar_nome_z_a[chromium]" time="30.335"><failure message="playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.&#10;Call log:&#10;waiting for locator(&quot;[data-test=\&quot;user-name\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c03_ordenar_nome_z_a(page: Page) -&gt; None:
+        # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos
+        page.goto(BASE_URL + "/")
+&gt;       page.locator('[data-test="user-name"]').fill("standard_user")
+
+outputs/_avaliacao/run1/QAAGENT-4/test_qaagent_4.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.12/site-packages/playwright/sync_api/_generated.py:15743: in fill
+    self._sync(
+venv/lib/python3.12/site-packages/playwright/_impl/_locator.py:208: in fill
+    return await self._frame.fill(self._selector, strict=True, **params)
+venv/lib/python3.12/site-packages/playwright/_impl/_frame.py:527: in fill
+    await self._channel.send("fill", locals_to_params(locals()))
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:59: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;playwright._impl._connection.Connection object at 0x75ee17907c50&gt;
+cb = &lt;function Channel.send.&lt;locals&gt;.&lt;lambda&gt; at 0x75ee162ce200&gt;
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -&gt; Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+&gt;           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Locator.fill: Timeout 30000ms exceeded.
+E           Call log:
+E           waiting for locator("[data-test=\"user-name\"]")
+
+venv/lib/python3.12/site-packages/playwright/_impl/_connection.py:520: TimeoutError</failure></testcase></testsuite></testsuites>

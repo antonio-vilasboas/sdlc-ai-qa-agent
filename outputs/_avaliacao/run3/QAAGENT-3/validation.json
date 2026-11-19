@@ -1,0 +1,20 @@
+{
+  "validated_at": "2026-10-11T15:34:12+00:00",
+  "file": "test_qaagent_3.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_submeter_login_sem_campos",
+    "test_c02_submeter_login_apenas_utilizador"
+  ],
+  "selectors_used": [
+    "error",
+    "login-button",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_submeter_login_sem_campos": 4,
+    "test_c02_submeter_login_apenas_utilizador": 5
+  },
+  "issues": []
+}
