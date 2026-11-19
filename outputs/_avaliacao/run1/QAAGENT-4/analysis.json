@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-10-11T15:25:20+00:00",
+  "story_summary": "Ordenação de produtos no catálogo",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    4,
+    3,
+    8,
+    5,
+    7
+  ],
+  "metrics": {
+    "attempts": 2,
+    "prompt_tokens": 12686,
+    "completion_tokens": 6514,
+    "latency_ms": 23737,
+    "cost_usd": 0.004526,
+    "finish_reasons": [
+      "stop",
+      "stop"
+    ],
+    "correction_requests": [
+      "1 validation error for AnalysisSpec\n  Invalid JSON: trailing characters at line 1 column 2392 [type=json_invalid, input_value='{\"$defs\": {\"Scenario\": {...rios de aceitação.\"]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/json_invalid"
+    ]
+  },
+  "spec": {
+    "story_key": "QAAGENT-4",
+    "summary": "Validar que o catálogo de produtos ordena corretamente por preço ascendente, preço descendente e nome descendente (Z a A), e que a opção ativa é apresentada no seletor.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Ordenar produtos por preço ascendente",
+        "type": "nominal",
+        "given": [
+          "O cliente está autenticado e encontra-se na página de catálogo de produtos"
+        ],
+        "when": [
+          "O cliente seleciona a ordenação \"Price (low to high)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados por ordem crescente de preço, do mais barato para o mais caro",
+          "Os preços apresentados, por ordem, são $7.99, $9.99, $15.99, $15.99, $29.99 e $49.99",
+          "A opção ativa do seletor de ordenação apresenta o texto \"Price (low to high)\""
+        ],
+        "rules": [
+          "RN-ORD-02",
+          "RN-ORD-03"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Price (low to high)",
+          "opcao_ativa_esperada": "Price (low to high)",
+          "precos_esperados_ordem": "$7.99, $9.99, $15.99, $15.99, $29.99, $49.99",
+          "produtos_preco_15_99": "Sauce Labs Bolt T-Shirt e Test.allTheThings() T-Shirt (Red); a ordem relativa entre estes dois não é validada"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Ordenar produtos por preço descendente",
+        "type": "nominal",
+        "given": [
+          "O cliente está autenticado e encontra-se na página de catálogo de produtos"
+        ],
+        "when": [
+          "O cliente seleciona a ordenação \"Price (high to low)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados por ordem decrescente de preço, do mais caro para o mais barato",
+          "Os preços apresentados, por ordem, são $49.99, $29.99, $15.99, $15.99, $9.99 e $7.99",
+          "A opção ativa do seletor de ordenação apresenta o texto \"Price (high to low)\""
+        ],
+        "rules": [
+          "RN-ORD-02",
+          "RN-ORD-03"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Price (high to low)",
+          "opcao_ativa_esperada": "Price (high to low)",
+          "precos_esperados_ordem": "$49.99, $29.99, $15.99, $15.99, $9.99, $7.99",
+          "produtos_preco_15_99": "Sauce Labs Bolt T-Shirt e Test.allTheThings() T-Shirt (Red); a ordem relativa entre estes dois não é validada"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Ordenar produtos por nome descendente (Z a A)",
+        "type": "nominal",
+        "given": [
+          "O cliente está autenticado e encontra-se na página de catálogo de produtos"
+        ],
+        "when": [
+          "O cliente seleciona a ordenação \"Name (Z to A)\" no seletor de ordenação"
+        ],
+        "then": [
+          "Os seis produtos são apresentados por ordem alfabética inversa de nome",
+          "A ordem apresentada é: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light e Sauce Labs Backpack",
+          "A opção ativa do seletor de ordenação apresenta o texto \"Name (Z to A)\""
+        ],
+        "rules": [
+          "RN-ORD-02"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "url": "https://www.saucedemo.com/inventory.html",
+          "opcao_ordenacao": "Name (Z to A)",
+          "opcao_ativa_esperada": "Name (Z to A)",
+          "ordem_nomes_esperada": "Test.allTheThings() T-Shirt (Red); Sauce Labs Onesie; Sauce Labs Fleece Jacket; Sauce Labs Bolt T-Shirt; Sauce Labs Bike Light; Sauce Labs Backpack"
+        }
+      }
+    ],
+    "gaps": [
+      "Credenciais de utilizador e passos de autenticação não estão especificados na User Story nem no contexto fornecido, necessários para o pré-requisito de cliente autenticado.",
+      "Comportamento esperado para a ordenação por nome ascendente (Name (A to Z)) não está coberto pelos critérios de aceitação, apesar de ser uma das opções descritas na História de Utilizador.",
+      "Comportamento esperado da ordenação por omissão do catálogo ao entrar na página não está coberto pelos critérios de aceitação."
+    ]
+  }
+}

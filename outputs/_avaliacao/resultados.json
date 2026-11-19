@@ -1,0 +1,132 @@
+{
+  "por_story": [
+    {
+      "story": "QAAGENT-1",
+      "execucoes": 3,
+      "cenarios_medio": 3,
+      "cenarios_min_max": "3–3",
+      "rondas_validador_max": 1,
+      "per_medio": 100.0,
+      "per_por_execucao": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 100.0,
+      "ar": 100.0,
+      "cenarios_revistos": 3,
+      "t_auto_s": 31.8,
+      "custo_medio_usd": 0.0048,
+      "t_manual_s": 2700.0,
+      "et": 98.8
+    },
+    {
+      "story": "QAAGENT-2",
+      "execucoes": 3,
+      "cenarios_medio": 3,
+      "cenarios_min_max": "3–3",
+      "rondas_validador_max": 1,
+      "per_medio": 100.0,
+      "per_por_execucao": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 100.0,
+      "ar": 100.0,
+      "cenarios_revistos": 3,
+      "t_auto_s": 24.3,
+      "custo_medio_usd": 0.0039,
+      "t_manual_s": 2700.0,
+      "et": 99.1
+    },
+    {
+      "story": "QAAGENT-3",
+      "execucoes": 3,
+      "cenarios_medio": 2,
+      "cenarios_min_max": "2–2",
+      "rondas_validador_max": 1,
+      "per_medio": 100.0,
+      "per_por_execucao": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 100.0,
+      "ar": 100.0,
+      "cenarios_revistos": 2,
+      "t_auto_s": 16.6,
+      "custo_medio_usd": 0.0026,
+      "t_manual_s": 2700.0,
+      "et": 99.4
+    },
+    {
+      "story": "QAAGENT-4",
+      "execucoes": 3,
+      "cenarios_medio": 3,
+      "cenarios_min_max": "3–3",
+      "rondas_validador_max": 2,
+      "per_medio": 33.3,
+      "per_por_execucao": [
+        0.0,
+        0.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 66.7,
+      "ar": 100.0,
+      "cenarios_revistos": 3,
+      "t_auto_s": 48.9,
+      "custo_medio_usd": 0.0078,
+      "t_manual_s": 2700.0,
+      "et": 98.2
+    },
+    {
+      "story": "QAAGENT-5",
+      "execucoes": 3,
+      "cenarios_medio": 4.7,
+      "cenarios_min_max": "4–5",
+      "rondas_validador_max": 1,
+      "per_medio": 100.0,
+      "per_por_execucao": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 100.0,
+      "ar": 100.0,
+      "cenarios_revistos": 5,
+      "t_auto_s": 37.9,
+      "custo_medio_usd": 0.0061,
+      "t_manual_s": 2700.0,
+      "et": 98.6
+    },
+    {
+      "story": "QAAGENT-6",
+      "execucoes": 3,
+      "cenarios_medio": 5,
+      "cenarios_min_max": "5–5",
+      "rondas_validador_max": 1,
+      "per_medio": 100.0,
+      "per_por_execucao": [
+        100.0,
+        100.0,
+        100.0
+      ],
+      "cobertura_regras_medio": 87.5,
+      "ar": 100.0,
+      "cenarios_revistos": 5,
+      "t_auto_s": 50.2,
+      "custo_medio_usd": 0.0076,
+      "t_manual_s": 2700.0,
+      "et": 98.1
+    }
+  ],
+  "global": {
+    "per_medio": 88.9,
+    "cobertura_regras_medio": 92.4,
+    "ar": 100.0,
+    "et": 98.7,
+    "t_auto_medio_s": 35.0,
+    "custo_total_usd": 0.0984
+  }
+}

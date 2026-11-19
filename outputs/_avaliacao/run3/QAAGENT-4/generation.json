@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-10-11T15:34:46+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "step_retrieval": {
+    "Estou autenticado na loja Swag Labs e na página de catálogo de produtos": [
+      3,
+      8
+    ],
+    "Escolho a ordenação \"Price (low to high)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os seis produtos são apresentados do mais barato para o mais caro, com os preços por ordem crescente: $7.99, $9.99, $15.99, $15.99, $29.99, $49.99": [
+      4,
+      8
+    ],
+    "A opção ativa do seletor é \"Price (low to high)\"": [
+      4,
+      3
+    ],
+    "A verificação incide sobre a sequência de preços e não sobre a posição relativa dos produtos com o mesmo preço de $15.99": [
+      4,
+      3
+    ],
+    "Escolho a ordenação \"Price (high to low)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os seis produtos são apresentados do mais caro para o mais barato, com os preços por ordem decrescente: $49.99, $29.99, $15.99, $15.99, $9.99, $7.99": [
+      4,
+      8
+    ],
+    "A opção ativa do seletor é \"Price (high to low)\"": [
+      4,
+      3
+    ],
+    "Escolho a ordenação \"Name (Z to A)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os seis produtos são apresentados por ordem alfabética inversa: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack": [
+      4,
+      3
+    ],
+    "A opção ativa do seletor é \"Name (Z to A)\"": [
+      4,
+      1
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 6129,
+    "completion_tokens": 4644,
+    "latency_ms": 17318,
+    "cost_usd": 0.002935,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-4",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_ordenar_preco_ascendente",
+        "code": "def test_c01_ordenar_preco_ascendente(page: Page) -> None:\n    # Dado Estou autenticado na loja Swag Labs e na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    # Quando Escolho a ordenação \"Price (low to high)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(\"lohi\")\n    # Então Os seis produtos são apresentados do mais barato para o mais caro, com os preços por ordem crescente: $7.99, $9.99, $15.99, $15.99, $29.99, $49.99\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text([\"$7.99\", \"$9.99\", \"$15.99\", \"$15.99\", \"$29.99\", \"$49.99\"])\n    # E A opção ativa do seletor é \"Price (low to high)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text(\"Price (low to high)\")\n    # E A verificação incide sobre a sequência de preços e não sobre a posição relativa dos produtos com o mesmo preço de $15.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_count(6)"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_ordenar_preco_descendente",
+        "code": "def test_c02_ordenar_preco_descendente(page: Page) -> None:\n    # Dado Estou autenticado na loja Swag Labs e na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    # Quando Escolho a ordenação \"Price (high to low)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(\"hilo\")\n    # Então Os seis produtos são apresentados do mais caro para o mais barato, com os preços por ordem decrescente: $49.99, $29.99, $15.99, $15.99, $9.99, $7.99\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text([\"$49.99\", \"$29.99\", \"$15.99\", \"$15.99\", \"$9.99\", \"$7.99\"])\n    # E A opção ativa do seletor é \"Price (high to low)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text(\"Price (high to low)\")\n    # E A verificação incide sobre a sequência de preços e não sobre a posição relativa dos produtos com o mesmo preço de $15.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_count(6)"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_ordenar_nome_z_a",
+        "code": "def test_c03_ordenar_nome_z_a(page: Page) -> None:\n    # Dado Estou autenticado na loja Swag Labs e na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    # Quando Escolho a ordenação \"Name (Z to A)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(\"za\")\n    # Então Os seis produtos são apresentados por ordem alfabética inversa: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light, Sauce Labs Backpack\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text([\"Test.allTheThings() T-Shirt (Red)\", \"Sauce Labs Onesie\", \"Sauce Labs Fleece Jacket\", \"Sauce Labs Bolt T-Shirt\", \"Sauce Labs Bike Light\", \"Sauce Labs Backpack\"])\n    # E A opção ativa do seletor é \"Name (Z to A)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text(\"Name (Z to A)\")"
+      }
+    ],
+    "assumptions": [
+      "Credenciais do utilizador 'standard_user' / 'secret_sauce' retiradas da secção 1 da base de conhecimento (não constavam do test_data, que indica 'não especificadas').",
+      "Seletores do formulário de login ('username', 'password', 'login-button') não constam do contexto; foram usados os valores data-test habituais da aplicação e devem ser validados no DOM real.",
+      "URL de login assumida como BASE_URL + \"/\" (página raiz de autenticação do Swag Labs).",
+      "Seletor '[data-test=\"title\"]' e texto 'Products' usados para confirmar a página de catálogo, conforme secção 3 da base de conhecimento."
+    ]
+  }
+}

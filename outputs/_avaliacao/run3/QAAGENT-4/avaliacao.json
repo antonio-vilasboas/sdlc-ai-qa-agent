@@ -1,0 +1,10 @@
+{
+  "story": "QAAGENT-4",
+  "run": 3,
+  "pipeline_exit": 0,
+  "pytest": {
+    "total": 3,
+    "passed": 3,
+    "failed": {}
+  }
+}

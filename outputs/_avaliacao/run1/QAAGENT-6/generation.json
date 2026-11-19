@@ -1,0 +1,190 @@
+{
+  "generated_at": "2026-10-11T15:28:58+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "O utilizador está autenticado com um utilizador válido (ver US-01)": [
+      1,
+      2
+    ],
+    "O catálogo de produtos está apresentado": [
+      3,
+      4
+    ],
+    "Adiciona o produto Sauce Labs Backpack ao carrinho": [
+      3,
+      5
+    ],
+    "Abre o carrinho": [
+      5,
+      3
+    ],
+    "Inicia o checkout": [
+      6,
+      8
+    ],
+    "O contador do carrinho apresenta 1 produto": [
+      5,
+      3
+    ],
+    "É apresentado o formulário de informação do cliente com os campos primeiro nome, apelido e código postal": [
+      6,
+      8
+    ],
+    "A página do formulário tem o título 'Checkout: Your Information'": [
+      6,
+      8
+    ],
+    "O carrinho contém o produto Sauce Labs Backpack": [
+      3,
+      8
+    ],
+    "O utilizador está no formulário de informação do cliente": [
+      6,
+      1
+    ],
+    "Preenche o primeiro nome, o apelido e o código postal": [
+      6,
+      8
+    ],
+    "Continua": [
+      8,
+      5
+    ],
+    "É apresentado o resumo da encomenda com o título 'Checkout: Overview'": [
+      8,
+      7
+    ],
+    "O resumo apresenta o produto Sauce Labs Backpack com o preço $29.99": [
+      3,
+      7
+    ],
+    "O resumo apresenta a informação de pagamento 'SauceCard #31337' e a informação de envio 'Free Pony Express Delivery!'": [
+      7,
+      8
+    ],
+    "O utilizador está no resumo da encomenda após preencher os dados do cliente": [
+      8,
+      6
+    ],
+    "Observa os valores de subtotal, taxa e total do resumo": [
+      7,
+      3
+    ],
+    "O subtotal ('Item total') é $29.99": [
+      7,
+      3
+    ],
+    "A taxa ('Tax') é $2.40, correspondente a 8% do subtotal arredondado a 2 casas decimais": [
+      7,
+      8
+    ],
+    "O total é $32.39, igual à soma do subtotal com a taxa": [
+      7,
+      4
+    ],
+    "O utilizador está no resumo da encomenda": [
+      1,
+      6
+    ],
+    "Finaliza a encomenda": [
+      8,
+      7
+    ],
+    "É apresentada a confirmação da encomenda com o cabeçalho 'Thank you for your order!'": [
+      8,
+      6
+    ],
+    "É apresentado o texto 'Your order has been dispatched, and will arrive just as fast as the pony can get there!'": [
+      8,
+      6
+    ],
+    "O contador do carrinho deixa de ser apresentado": [
+      5,
+      3
+    ],
+    "A página de confirmação tem o título 'Checkout: Complete!'": [
+      8,
+      6
+    ],
+    "Preenche o primeiro nome e o apelido": [
+      6,
+      1
+    ],
+    "Deixa o código postal vazio": [
+      6,
+      8
+    ],
+    "É apresentada a mensagem de erro 'Error: Postal Code is required'": [
+      6,
+      8
+    ],
+    "A aplicação não avança para o resumo da encomenda": [
+      6,
+      9
+    ],
+    "O utilizador permanece no formulário de informação do cliente": [
+      6,
+      1
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 8276,
+    "completion_tokens": 9164,
+    "latency_ms": 30250,
+    "cost_usd": 0.00541,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-6",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_abrir_formulario_checkout",
+        "code": "def test_c01_abrir_formulario_checkout(page: Page) -> None:\n    # Dado O utilizador está autenticado com um utilizador válido (ver US-01)\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E O catálogo de produtos está apresentado\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")\n    expect(page.locator('[data-test=\"inventory-list\"]')).to_be_visible()\n    # Quando Adiciona o produto Sauce Labs Backpack ao carrinho\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    # E Abre o carrinho\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    # E Inicia o checkout\n    page.locator('[data-test=\"checkout\"]').click()\n    # Então O contador do carrinho apresenta 1 produto\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_text(\"1\")\n    # E É apresentado o formulário de informação do cliente com os campos primeiro nome, apelido e código postal\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    expect(page.locator('[data-test=\"firstName\"]')).to_be_visible()\n    expect(page.locator('[data-test=\"lastName\"]')).to_be_visible()\n    expect(page.locator('[data-test=\"postalCode\"]')).to_be_visible()\n    # E A página do formulário tem o título 'Checkout: Your Information'\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Checkout: Your Information\")"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_avancar_para_resumo",
+        "code": "def test_c02_avancar_para_resumo(page: Page) -> None:\n    # Dado O utilizador está autenticado com um utilizador válido (ver US-01)\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E O carrinho contém o produto Sauce Labs Backpack\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    page.locator('[data-test=\"checkout\"]').click()\n    # E O utilizador está no formulário de informação do cliente\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    # Quando Preenche o primeiro nome, o apelido e o código postal\n    page.locator('[data-test=\"firstName\"]').fill(\"Ana\")\n    page.locator('[data-test=\"lastName\"]').fill(\"Silva\")\n    page.locator('[data-test=\"postalCode\"]').fill(\"1000-001\")\n    # E Continua\n    page.locator('[data-test=\"continue\"]').click()\n    # Então É apresentado o resumo da encomenda com o título 'Checkout: Overview'\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-two.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Checkout: Overview\")\n    # E O resumo apresenta o produto Sauce Labs Backpack com o preço $29.99\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text(\"$29.99\")\n    # E O resumo apresenta a informação de pagamento 'SauceCard #31337' e a informação de envio 'Free Pony Express Delivery!'\n    expect(page.locator('[data-test=\"payment-info-value\"]')).to_have_text(\"SauceCard #31337\")\n    expect(page.locator('[data-test=\"shipping-info-value\"]')).to_have_text(\"Free Pony Express Delivery!\")"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_valores_subtotal_taxa_total",
+        "code": "def test_c03_valores_subtotal_taxa_total(page: Page) -> None:\n    # Dado O utilizador está autenticado com um utilizador válido (ver US-01)\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E O carrinho contém o produto Sauce Labs Backpack\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    page.locator('[data-test=\"checkout\"]').click()\n    # E O utilizador está no resumo da encomenda após preencher os dados do cliente\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    page.locator('[data-test=\"firstName\"]').fill(\"Ana\")\n    page.locator('[data-test=\"lastName\"]').fill(\"Silva\")\n    page.locator('[data-test=\"postalCode\"]').fill(\"1000-001\")\n    page.locator('[data-test=\"continue\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-two.html\")\n    # Quando Observa os valores de subtotal, taxa e total do resumo\n    subtotal = page.locator('[data-test=\"subtotal-label\"]')\n    taxa = page.locator('[data-test=\"tax-label\"]')\n    total = page.locator('[data-test=\"total-label\"]')\n    # Então O subtotal ('Item total') é $29.99\n    expect(subtotal).to_have_text(\"Item total: $29.99\")\n    # E A taxa ('Tax') é $2.40, correspondente a 8% do subtotal arredondado a 2 casas decimais\n    expect(taxa).to_have_text(\"Tax: $2.40\")\n    # E O total é $32.39, igual à soma do subtotal com a taxa\n    expect(total).to_have_text(\"Total: $32.39\")"
+      },
+      {
+        "scenario_id": "C04",
+        "function_name": "test_c04_confirmar_encomenda_carrinho_vazio",
+        "code": "def test_c04_confirmar_encomenda_carrinho_vazio(page: Page) -> None:\n    # Dado O utilizador está autenticado com um utilizador válido (ver US-01)\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E O carrinho contém o produto Sauce Labs Backpack\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    page.locator('[data-test=\"checkout\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    page.locator('[data-test=\"firstName\"]').fill(\"Ana\")\n    page.locator('[data-test=\"lastName\"]').fill(\"Silva\")\n    page.locator('[data-test=\"postalCode\"]').fill(\"1000-001\")\n    page.locator('[data-test=\"continue\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-two.html\")\n    # E O utilizador está no resumo da encomenda\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Checkout: Overview\")\n    # Quando Finaliza a encomenda\n    page.locator('[data-test=\"finish\"]').click()\n    # Então É apresentada a confirmação da encomenda com o cabeçalho 'Thank you for your order!'\n    expect(page).to_have_url(BASE_URL + \"/checkout-complete.html\")\n    expect(page.locator('[data-test=\"complete-header\"]')).to_have_text(\"Thank you for your order!\")\n    # E É apresentado o texto 'Your order has been dispatched, and will arrive just as fast as the pony can get there!'\n    expect(page.locator('[data-test=\"complete-text\"]')).to_have_text(\"Your order has been dispatched, and will arrive just as fast as the pony can get there!\")\n    # E O contador do carrinho deixa de ser apresentado\n    expect(page.locator('[data-test=\"shopping-cart-badge\"]')).to_have_count(0)\n    # E A página de confirmação tem o título 'Checkout: Complete!'\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Checkout: Complete!\")"
+      },
+      {
+        "scenario_id": "C05",
+        "function_name": "test_c05_impedir_avanco_sem_codigo_postal",
+        "code": "def test_c05_impedir_avanco_sem_codigo_postal(page: Page) -> None:\n    # Dado O utilizador está autenticado com um utilizador válido (ver US-01)\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # E O carrinho contém o produto Sauce Labs Backpack\n    page.locator('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click()\n    expect(page.locator('[data-test=\"remove-sauce-labs-backpack\"]')).to_be_visible()\n    page.locator('[data-test=\"shopping-cart-link\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/cart.html\")\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(\"Sauce Labs Backpack\")\n    page.locator('[data-test=\"checkout\"]').click()\n    # E O utilizador está no formulário de informação do cliente\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    # Quando Preenche o primeiro nome e o apelido\n    page.locator('[data-test=\"firstName\"]').fill(\"Ana\")\n    page.locator('[data-test=\"lastName\"]').fill(\"Silva\")\n    # E Deixa o código postal vazio\n    expect(page.locator('[data-test=\"postalCode\"]')).to_have_value(\"\")\n    # E Continua\n    page.locator('[data-test=\"continue\"]').click()\n    # Então É apresentada a mensagem de erro 'Error: Postal Code is required'\n    expect(page.locator('[data-test=\"error\"]')).to_have_text(\"Error: Postal Code is required\")\n    # E A aplicação não avança para o resumo da encomenda\n    expect(page).not_to_have_url(BASE_URL + \"/checkout-step-two.html\")\n    # E O utilizador permanece no formulário de informação do cliente\n    expect(page).to_have_url(BASE_URL + \"/checkout-step-one.html\")\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Checkout: Your Information\")"
+      }
+    ],
+    "assumptions": [
+      "Primeiro nome de exemplo: 'Ana' (C02, C03, C04, C05)",
+      "Apelido de exemplo: 'Silva' (C02, C03, C04, C05)",
+      "Código postal de exemplo: '1000-001' (C02, C03, C04); em C05 é deixado vazio por definição do cenário",
+      "Credenciais usadas: standard_user / secret_sauce, conforme secção 1 do contexto"
+    ]
+  }
+}

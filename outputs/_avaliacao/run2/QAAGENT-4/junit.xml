@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="16.495" timestamp="2026-10-11T16:31:04.002706+01:00" hostname="Antnio"><testcase classname="outputs._avaliacao.run2.QAAGENT-4.test_qaagent_4" name="test_c01_ordenar_preco_ascendente[chromium]" time="5.802"><failure message="AssertionError: Locator expected to have text 'Products'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;LocatorAssertions.to_have_text with timeout 5000ms&#10;  - waiting for locator(&quot;[data-test=\&quot;title\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c01_ordenar_preco_ascendente(page: Page) -&gt; None:
+        # Dado Estou autenticado na loja Swag Labs
+        page.goto(BASE_URL + "/inventory.html")
+&gt;       expect(page.locator('[data-test="title"]')).to_have_text("Products")
+E       AssertionError: Locator expected to have text 'Products'
+E       Actual value: &lt;element(s) not found&gt; 
+E       Call log:
+E       LocatorAssertions.to_have_text with timeout 5000ms
+E         - waiting for locator("[data-test=\"title\"]")
+
+outputs/_avaliacao/run2/QAAGENT-4/test_qaagent_4.py:16: AssertionError</failure></testcase><testcase classname="outputs._avaliacao.run2.QAAGENT-4.test_qaagent_4" name="test_c02_ordenar_preco_descendente[chromium]" time="5.328"><failure message="AssertionError: Locator expected to have text 'Products'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;LocatorAssertions.to_have_text with timeout 5000ms&#10;  - waiting for locator(&quot;[data-test=\&quot;title\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c02_ordenar_preco_descendente(page: Page) -&gt; None:
+        # Dado Estou autenticado na loja Swag Labs
+        page.goto(BASE_URL + "/inventory.html")
+&gt;       expect(page.locator('[data-test="title"]')).to_have_text("Products")
+E       AssertionError: Locator expected to have text 'Products'
+E       Actual value: &lt;element(s) not found&gt; 
+E       Call log:
+E       LocatorAssertions.to_have_text with timeout 5000ms
+E         - waiting for locator("[data-test=\"title\"]")
+
+outputs/_avaliacao/run2/QAAGENT-4/test_qaagent_4.py:33: AssertionError</failure></testcase><testcase classname="outputs._avaliacao.run2.QAAGENT-4.test_qaagent_4" name="test_c03_ordenar_nome_descendente[chromium]" time="5.341"><failure message="AssertionError: Locator expected to have text 'Products'&#10;Actual value: &lt;element(s) not found&gt; &#10;Call log:&#10;LocatorAssertions.to_have_text with timeout 5000ms&#10;  - waiting for locator(&quot;[data-test=\&quot;title\&quot;]&quot;)">page = &lt;Page url='https://www.saucedemo.com/'&gt;
+
+    def test_c03_ordenar_nome_descendente(page: Page) -&gt; None:
+        # Dado Estou autenticado na loja Swag Labs
+        page.goto(BASE_URL + "/inventory.html")
+&gt;       expect(page.locator('[data-test="title"]')).to_have_text("Products")
+E       AssertionError: Locator expected to have text 'Products'
+E       Actual value: &lt;element(s) not found&gt; 
+E       Call log:
+E       LocatorAssertions.to_have_text with timeout 5000ms
+E         - waiting for locator("[data-test=\"title\"]")
+
+outputs/_avaliacao/run2/QAAGENT-4/test_qaagent_4.py:50: AssertionError</failure></testcase></testsuite></testsuites>

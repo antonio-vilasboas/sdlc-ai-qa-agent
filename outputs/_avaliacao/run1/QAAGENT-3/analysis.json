@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-10-11T15:24:43+00:00",
+  "story_summary": "Validação de campos obrigatórios no formulário de login",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    6,
+    8,
+    3
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4841,
+    "completion_tokens": 1208,
+    "latency_ms": 5574,
+    "cost_usd": 0.001088,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-3",
+    "summary": "Verificar que o formulário de login apresenta a mensagem de erro correta para cada campo obrigatório em falta e que o utilizador permanece na página de login.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Submeter login sem preencher nenhum campo",
+        "type": "validação",
+        "given": [
+          "O utilizador está na página de login"
+        ],
+        "when": [
+          "O utilizador submete o formulário de login sem preencher o utilizador nem a password"
+        ],
+        "then": [
+          "É apresentada a mensagem de erro indicando que o utilizador é obrigatório",
+          "A mensagem de erro não indica que a password é obrigatória",
+          "O utilizador permanece na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-03"
+        ],
+        "criteria": [
+          1,
+          3
+        ],
+        "test_data": {
+          "url_login": "https://www.saucedemo.com/",
+          "mensagem_esperada": "Epic sadface: Username is required",
+          "utilizador_preenchido": "",
+          "password_preenchida": ""
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Submeter login apenas com utilizador preenchido",
+        "type": "validação",
+        "given": [
+          "O utilizador está na página de login"
+        ],
+        "when": [
+          "O utilizador preenche o campo utilizador com 'standard_user'",
+          "O utilizador deixa o campo password vazio",
+          "O utilizador submete o formulário de login"
+        ],
+        "then": [
+          "É apresentada a mensagem de erro indicando que a password é obrigatória",
+          "O utilizador permanece na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-03",
+          "RN-LOGIN-04"
+        ],
+        "criteria": [
+          2,
+          3
+        ],
+        "test_data": {
+          "url_login": "https://www.saucedemo.com/",
+          "utilizador_preenchido": "standard_user",
+          "password_preenchida": "",
+          "mensagem_esperada": "Epic sadface: Password is required"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}

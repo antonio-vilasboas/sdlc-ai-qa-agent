@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-10-11T15:25:55+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 2,
+  "context_sections": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "O cliente está autenticado e encontra-se na página de catálogo de produtos": [
+      9,
+      8
+    ],
+    "O cliente seleciona a ordenação \"Price (low to high)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os seis produtos são apresentados por ordem crescente de preço, do mais barato para o mais caro": [
+      4,
+      3
+    ],
+    "Os preços apresentados, por ordem, são $7.99, $9.99, $15.99, $15.99, $29.99 e $49.99": [
+      4,
+      8
+    ],
+    "A opção ativa do seletor de ordenação apresenta o texto \"Price (low to high)\"": [
+      4,
+      3
+    ],
+    "O cliente seleciona a ordenação \"Price (high to low)\" no seletor de ordenação": [
+      4,
+      3
+    ],
+    "Os seis produtos são apresentados por ordem decrescente de preço, do mais caro para o mais barato": [
+      4,
+      3
+    ],
+    "Os preços apresentados, por ordem, são $49.99, $29.99, $15.99, $15.99, $9.99 e $7.99": [
+      4,
+      8
+    ],
+    "A opção ativa do seletor de ordenação apresenta o texto \"Price (high to low)\"": [
+      4,
+      3
+    ],
+    "O cliente seleciona a ordenação \"Name (Z to A)\" no seletor de ordenação": [
+      4,
+      6
+    ],
+    "Os seis produtos são apresentados por ordem alfabética inversa de nome": [
+      4,
+      3
+    ],
+    "A ordem apresentada é: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light e Sauce Labs Backpack": [
+      4,
+      3
+    ],
+    "A opção ativa do seletor de ordenação apresenta o texto \"Name (Z to A)\"": [
+      4,
+      8
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 7184,
+    "completion_tokens": 4153,
+    "latency_ms": 15388,
+    "cost_usd": 0.002795,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-4",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_ordenar_preco_ascendente",
+        "code": "def test_c01_ordenar_preco_ascendente(page: Page) -> None:\n    # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"user-name\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # Quando O cliente seleciona a ordenação \"Price (low to high)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Price (low to high)')\n    # Então Os seis produtos são apresentados por ordem crescente de preço, do mais barato para o mais caro\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    # E Os preços apresentados, por ordem, são $7.99, $9.99, $15.99, $15.99, $29.99 e $49.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text(['$7.99', '$9.99', '$15.99', '$15.99', '$29.99', '$49.99'])\n    # E A opção ativa do seletor de ordenação apresenta o texto \"Price (low to high)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Price (low to high)')"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_ordenar_preco_descendente",
+        "code": "def test_c02_ordenar_preco_descendente(page: Page) -> None:\n    # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"user-name\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # Quando O cliente seleciona a ordenação \"Price (high to low)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Price (high to low)')\n    # Então Os seis produtos são apresentados por ordem decrescente de preço, do mais caro para o mais barato\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    # E Os preços apresentados, por ordem, são $49.99, $29.99, $15.99, $15.99, $9.99 e $7.99\n    expect(page.locator('[data-test=\"inventory-item-price\"]')).to_have_text(['$49.99', '$29.99', '$15.99', '$15.99', '$9.99', '$7.99'])\n    # E A opção ativa do seletor de ordenação apresenta o texto \"Price (high to low)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Price (high to low)')"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_ordenar_nome_z_a",
+        "code": "def test_c03_ordenar_nome_z_a(page: Page) -> None:\n    # Dado O cliente está autenticado e encontra-se na página de catálogo de produtos\n    page.goto(BASE_URL + \"/\")\n    page.locator('[data-test=\"user-name\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")\n    # Quando O cliente seleciona a ordenação \"Name (Z to A)\" no seletor de ordenação\n    page.locator('[data-test=\"product-sort-container\"]').select_option(label='Name (Z to A)')\n    # Então Os seis produtos são apresentados por ordem alfabética inversa de nome\n    expect(page.locator('[data-test=\"inventory-item\"]')).to_have_count(6)\n    # E A ordem apresentada é: Test.allTheThings() T-Shirt (Red), Sauce Labs Onesie, Sauce Labs Fleece Jacket, Sauce Labs Bolt T-Shirt, Sauce Labs Bike Light e Sauce Labs Backpack\n    expect(page.locator('[data-test=\"inventory-item-name\"]')).to_have_text(['Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Onesie', 'Sauce Labs Fleece Jacket', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Bike Light', 'Sauce Labs Backpack'])\n    # E A opção ativa do seletor de ordenação apresenta o texto \"Name (Z to A)\"\n    expect(page.locator('[data-test=\"active-option\"]')).to_have_text('Name (Z to A)')"
+      }
+    ],
+    "assumptions": [
+      "Credenciais de autenticação 'standard_user' / 'secret_sauce' não constam do contexto fornecido; foram usadas como valores de exemplo e devem ser confirmadas antes da execução.",
+      "Seletores de login 'user-name', 'password' e 'login-button' não constam do contexto fornecido (a secção de autenticação não foi recebida); foram usados como valores a confirmar.",
+      "A URL de login assume-se como BASE_URL + \"/\", conforme o RN-SES-01 (regresso a '/' após terminar sessão)."
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-10-11T15:24:24+00:00",
+  "story_summary": "Bloqueio de acesso a utilizador com conta bloqueada",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    6,
+    9,
+    8
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4412,
+    "completion_tokens": 1558,
+    "latency_ms": 6904,
+    "cost_usd": 0.00122,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-2",
+    "summary": "Validar que uma conta bloqueada não consegue iniciar sessão, que é apresentada a mensagem de conta bloqueada e que essa mensagem pode ser fechada.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Acesso recusado a conta bloqueada no login",
+        "type": "exceção",
+        "given": [
+          "Estou na página de login da loja"
+        ],
+        "when": [
+          "Introduzo o utilizador de teste de conta bloqueada e a password de teste",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "O acesso à loja é recusado",
+          "Permaneço na página de login (/)",
+          "Não sou redirecionado para o catálogo de produtos"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "url_login": "/",
+          "url_nao_permitido": "/inventory.html"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Mensagem de conta bloqueada apresentada no login",
+        "type": "exceção",
+        "given": [
+          "Estou na página de login da loja"
+        ],
+        "when": [
+          "Introduzo o utilizador de teste de conta bloqueada e a password de teste",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "É apresentada uma mensagem de erro",
+          "A mensagem de erro apresentada é exatamente \"Epic sadface: Sorry, this user has been locked out.\"",
+          "Permaneço na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro_esperada": "Epic sadface: Sorry, this user has been locked out.",
+          "url_login": "/"
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Fecho da mensagem de conta bloqueada",
+        "type": "nominal",
+        "given": [
+          "Estou na página de login da loja",
+          "Tentei iniciar sessão com o utilizador de teste de conta bloqueada e a password de teste",
+          "A mensagem de conta bloqueada está apresentada"
+        ],
+        "when": [
+          "Fecho a mensagem de erro através do botão de fecho"
+        ],
+        "then": [
+          "A mensagem de erro deixa de ser apresentada",
+          "Permaneço na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-06",
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro_esperada": "Epic sadface: Sorry, this user has been locked out.",
+          "url_login": "/"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}

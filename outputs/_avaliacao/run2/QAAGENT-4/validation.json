@@ -1,0 +1,26 @@
+{
+  "validated_at": "2026-10-11T15:31:03+00:00",
+  "file": "test_qaagent_4.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_ordenar_preco_ascendente",
+    "test_c02_ordenar_preco_descendente",
+    "test_c03_ordenar_nome_descendente"
+  ],
+  "selectors_used": [
+    "active-option",
+    "inventory-item",
+    "inventory-item-name",
+    "inventory-item-price",
+    "inventory-list",
+    "product-sort-container",
+    "title"
+  ],
+  "expects_per_test": {
+    "test_c01_ordenar_preco_ascendente": 6,
+    "test_c02_ordenar_preco_descendente": 6,
+    "test_c03_ordenar_nome_descendente": 6
+  },
+  "issues": []
+}

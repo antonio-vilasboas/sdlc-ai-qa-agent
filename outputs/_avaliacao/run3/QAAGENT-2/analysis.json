@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-10-11T15:33:41+00:00",
+  "story_summary": "Bloqueio de acesso a utilizador com conta bloqueada",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    6,
+    9,
+    8
+  ],
+  "metrics": {
+    "attempts": 2,
+    "prompt_tokens": 10895,
+    "completion_tokens": 4087,
+    "latency_ms": 15484,
+    "cost_usd": 0.003133,
+    "finish_reasons": [
+      "stop",
+      "stop"
+    ],
+    "correction_requests": [
+      "1 validation error for AnalysisSpec\n  Invalid JSON: trailing characters at line 3 column 1 [type=json_invalid, input_value='{\"$defs\": {\"Scenario\": {...da mensagem de erro.\"]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/json_invalid"
+    ]
+  },
+  "spec": {
+    "story_key": "QAAGENT-2",
+    "summary": "Validar que uma conta bloqueada não consegue iniciar sessão, que é apresentada a mensagem de conta bloqueada e que essa mensagem pode ser fechada pelo utilizador.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Acesso recusado a conta bloqueada",
+        "type": "exceção",
+        "given": [
+          "Que estou na página de login da loja"
+        ],
+        "when": [
+          "Introduzo o utilizador de uma conta bloqueada e a respetiva password",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "O acesso à loja é recusado",
+          "Permaneço na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          1
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "url_pagina_login": "https://www.saucedemo.com/",
+          "url_destino_nao_esperado": "/inventory.html"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Mensagem de erro de conta bloqueada apresentada",
+        "type": "exceção",
+        "given": [
+          "Que estou na página de login da loja"
+        ],
+        "when": [
+          "Introduzo o utilizador de uma conta bloqueada e a respetiva password",
+          "Submeto o formulário de login"
+        ],
+        "then": [
+          "É apresentada uma mensagem de erro com o texto 'Epic sadface: Sorry, this user has been locked out.'"
+        ],
+        "rules": [
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          2
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro": "Epic sadface: Sorry, this user has been locked out."
+        }
+      },
+      {
+        "id": "C03",
+        "title": "Fecho da mensagem de conta bloqueada",
+        "type": "exceção",
+        "given": [
+          "Que estou na página de login da loja",
+          "Que a mensagem de erro de conta bloqueada está apresentada após uma tentativa de login com a conta bloqueada"
+        ],
+        "when": [
+          "Utilizo o botão de fechar a mensagem de erro"
+        ],
+        "then": [
+          "A mensagem de erro deixa de ser apresentada",
+          "Permaneço na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-06",
+          "RN-LOGIN-02"
+        ],
+        "criteria": [
+          3
+        ],
+        "test_data": {
+          "utilizador": "locked_out_user",
+          "password": "secret_sauce",
+          "mensagem_erro": "Epic sadface: Sorry, this user has been locked out.",
+          "url_pagina_login": "https://www.saucedemo.com/"
+        }
+      }
+    ],
+    "gaps": [
+      "Não está especificado se os campos de utilizador e password mantêm os valores introduzidos após o fecho da mensagem de erro."
+    ]
+  }
+}

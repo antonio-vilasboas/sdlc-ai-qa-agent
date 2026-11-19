@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-10-11T15:34:03+00:00",
+  "story_summary": "Validação de campos obrigatórios no formulário de login",
+  "model": "anthropic/claude-haiku-5-5",
+  "temperature": "omissão do modelo",
+  "context_sections": [
+    0,
+    1,
+    2,
+    6,
+    8,
+    3
+  ],
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4841,
+    "completion_tokens": 1287,
+    "latency_ms": 6168,
+    "cost_usd": 0.001128,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "spec": {
+    "story_key": "QAAGENT-3",
+    "summary": "Validar que o formulário de login apresenta a mensagem de erro correta quando o utilizador ou a password não são preenchidos e que o utilizador permanece na página de login.",
+    "scenarios": [
+      {
+        "id": "C01",
+        "title": "Submeter login sem preencher nenhum campo",
+        "type": "validação",
+        "given": [
+          "O utilizador está na página de login"
+        ],
+        "when": [
+          "O utilizador submete o formulário de login sem preencher o utilizador nem a password"
+        ],
+        "then": [
+          "É apresentada a mensagem de erro \"Epic sadface: Username is required\"",
+          "O utilizador permanece na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-03",
+          "RN-LOGIN-04"
+        ],
+        "criteria": [
+          1,
+          3
+        ],
+        "test_data": {
+          "url_login": "https://www.saucedemo.com/",
+          "utilizador": "",
+          "password": "",
+          "mensagem_esperada": "Epic sadface: Username is required"
+        }
+      },
+      {
+        "id": "C02",
+        "title": "Submeter login apenas com o utilizador preenchido",
+        "type": "validação",
+        "given": [
+          "O utilizador está na página de login"
+        ],
+        "when": [
+          "O utilizador preenche o campo utilizador com \"standard_user\"",
+          "O utilizador submete o formulário de login sem preencher a password"
+        ],
+        "then": [
+          "É apresentada a mensagem de erro \"Epic sadface: Password is required\"",
+          "O utilizador permanece na página de login"
+        ],
+        "rules": [
+          "RN-LOGIN-03",
+          "RN-LOGIN-04"
+        ],
+        "criteria": [
+          2,
+          3
+        ],
+        "test_data": {
+          "url_login": "https://www.saucedemo.com/",
+          "utilizador": "standard_user",
+          "password": "",
+          "mensagem_esperada": "Epic sadface: Password is required"
+        }
+      }
+    ],
+    "gaps": []
+  }
+}

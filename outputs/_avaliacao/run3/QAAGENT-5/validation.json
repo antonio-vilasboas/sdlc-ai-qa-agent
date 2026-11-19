@@ -1,0 +1,32 @@
+{
+  "validated_at": "2026-10-11T15:35:27+00:00",
+  "file": "test_qaagent_5.py",
+  "allowed_selectors": 52,
+  "approved": true,
+  "tests": [
+    "test_c01_adicionar_primeiro_artigo",
+    "test_c02_adicionar_segundo_artigo",
+    "test_c03_abrir_carrinho_com_dois_artigos",
+    "test_c04_remover_artigo_do_carrinho"
+  ],
+  "selectors_used": [
+    "add-to-cart-sauce-labs-backpack",
+    "add-to-cart-sauce-labs-bike-light",
+    "inventory-item",
+    "login-button",
+    "password",
+    "remove-sauce-labs-backpack",
+    "remove-sauce-labs-bike-light",
+    "shopping-cart-badge",
+    "shopping-cart-link",
+    "title",
+    "username"
+  ],
+  "expects_per_test": {
+    "test_c01_adicionar_primeiro_artigo": 7,
+    "test_c02_adicionar_segundo_artigo": 7,
+    "test_c03_abrir_carrinho_com_dois_artigos": 11,
+    "test_c04_remover_artigo_do_carrinho": 7
+  },
+  "issues": []
+}

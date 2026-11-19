@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-10-11T15:34:12+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    8
+  ],
+  "step_retrieval": {
+    "O utilizador está na página de login": [
+      1,
+      2
+    ],
+    "O utilizador submete o formulário de login sem preencher o utilizador nem a password": [
+      1,
+      2
+    ],
+    "É apresentada a mensagem de erro \"Epic sadface: Username is required\"": [
+      2,
+      1
+    ],
+    "O utilizador permanece na página de login": [
+      1,
+      2
+    ],
+    "O utilizador preenche o campo utilizador com \"standard_user\"": [
+      1,
+      2
+    ],
+    "O utilizador submete o formulário de login sem preencher a password": [
+      2,
+      1
+    ],
+    "É apresentada a mensagem de erro \"Epic sadface: Password is required\"": [
+      2,
+      1
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 4955,
+    "completion_tokens": 2262,
+    "latency_ms": 8690,
+    "cost_usd": 0.001626,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-3",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_submeter_login_sem_campos",
+        "code": "def test_c01_submeter_login_sem_campos(page: Page) -> None:\n    # Dado O utilizador está na página de login\n    page.goto(BASE_URL + \"/\")\n    expect(page.locator('[data-test=\"login-button\"]')).to_be_visible()\n    # Quando O utilizador submete o formulário de login sem preencher o utilizador nem a password\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então É apresentada a mensagem de erro \"Epic sadface: Username is required\"\n    expect(page.locator('[data-test=\"error\"]')).to_have_text(\"Epic sadface: Username is required\")\n    # E O utilizador permanece na página de login\n    expect(page).to_have_url(BASE_URL + \"/\")\n    expect(page.locator('[data-test=\"login-button\"]')).to_be_visible()"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_submeter_login_apenas_utilizador",
+        "code": "def test_c02_submeter_login_apenas_utilizador(page: Page) -> None:\n    # Dado O utilizador está na página de login\n    page.goto(BASE_URL + \"/\")\n    expect(page.locator('[data-test=\"login-button\"]')).to_be_visible()\n    # Quando O utilizador preenche o campo utilizador com \"standard_user\"\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    expect(page.locator('[data-test=\"username\"]')).to_have_value(\"standard_user\")\n    # E O utilizador submete o formulário de login sem preencher a password\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então É apresentada a mensagem de erro \"Epic sadface: Password is required\"\n    expect(page.locator('[data-test=\"error\"]')).to_have_text(\"Epic sadface: Password is required\")\n    # E O utilizador permanece na página de login\n    expect(page).to_have_url(BASE_URL + \"/\")\n    expect(page.locator('[data-test=\"login-button\"]')).to_be_visible()"
+      }
+    ],
+    "assumptions": []
+  }
+}

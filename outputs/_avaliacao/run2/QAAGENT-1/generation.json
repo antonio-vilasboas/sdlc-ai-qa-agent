@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-11T15:29:28+00:00",
+  "model": "anthropic/claude-haiku-5-5",
+  "round": 1,
+  "context_sections": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "step_retrieval": {
+    "Estou na página de login da loja Swag Labs": [
+      1,
+      3
+    ],
+    "Introduzo o utilizador válido e a respetiva password": [
+      1,
+      2
+    ],
+    "Submeto o formulário de login": [
+      2,
+      1
+    ],
+    "Sou redirecionado para a página de catálogo de produtos": [
+      3,
+      4
+    ],
+    "O endereço da página de destino é /inventory.html": [
+      8,
+      3
+    ],
+    "Efetuo login com um utilizador válido e a respetiva password": [
+      2,
+      6
+    ],
+    "Na página de catálogo, o título da secção de produtos está visível": [
+      4,
+      3
+    ],
+    "O título apresentado é \"Products\"": [
+      8,
+      3
+    ],
+    "Na página de catálogo, é apresentada a lista de produtos disponíveis": [
+      3,
+      5
+    ],
+    "A lista contém 6 produtos, cada um com nome, descrição e preço visíveis": [
+      3,
+      8
+    ],
+    "Os produtos e preços apresentados são os seguintes: Sauce Labs Backpack $29.99; Sauce Labs Bike Light $9.99; Sauce Labs Bolt T-Shirt $15.99; Sauce Labs Fleece Jacket $49.99; Sauce Labs Onesie $7.99; Test.allTheThings() T-Shirt (Red) $15.99": [
+      4,
+      3
+    ]
+  },
+  "metrics": {
+    "attempts": 1,
+    "prompt_tokens": 6758,
+    "completion_tokens": 3975,
+    "latency_ms": 14302,
+    "cost_usd": 0.002663,
+    "finish_reasons": [
+      "stop"
+    ],
+    "correction_requests": []
+  },
+  "suite": {
+    "story_key": "QAAGENT-1",
+    "tests": [
+      {
+        "scenario_id": "C01",
+        "function_name": "test_c01_login_valido",
+        "code": "def test_c01_login_valido(page: Page) -> None:\n    # Dado Estou na página de login da loja Swag Labs\n    page.goto(BASE_URL + \"/\")\n    # Quando Introduzo o utilizador válido e a respetiva password\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    # E Submeto o formulário de login\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então Sou redirecionado para a página de catálogo de produtos\n    expect(page.locator('[data-test=\"product-sort-container\"]')).to_be_visible()\n    # E O endereço da página de destino é /inventory.html\n    expect(page).to_have_url(BASE_URL + \"/inventory.html\")"
+      },
+      {
+        "scenario_id": "C02",
+        "function_name": "test_c02_titulo_produtos_visivel_apos_login",
+        "code": "def test_c02_titulo_produtos_visivel_apos_login(page: Page) -> None:\n    # Dado Estou na página de login da loja Swag Labs\n    page.goto(BASE_URL + \"/\")\n    # Quando Efetuo login com um utilizador válido e a respetiva password\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então Na página de catálogo, o título da secção de produtos está visível\n    expect(page.locator('[data-test=\"title\"]')).to_be_visible()\n    # E O título apresentado é \"Products\"\n    expect(page.locator('[data-test=\"title\"]')).to_have_text(\"Products\")"
+      },
+      {
+        "scenario_id": "C03",
+        "function_name": "test_c03_lista_produtos_disponiveis_apos_login",
+        "code": "def test_c03_lista_produtos_disponiveis_apos_login(page: Page) -> None:\n    # Dado Estou na página de login da loja Swag Labs\n    page.goto(BASE_URL + \"/\")\n    # Quando Efetuo login com um utilizador válido e a respetiva password\n    page.locator('[data-test=\"username\"]').fill(\"standard_user\")\n    page.locator('[data-test=\"password\"]').fill(\"secret_sauce\")\n    page.locator('[data-test=\"login-button\"]').click()\n    # Então Na página de catálogo, é apresentada a lista de produtos disponíveis\n    expect(page.locator('[data-test=\"inventory-list\"]')).to_be_visible()\n    # E A lista contém 6 produtos, cada um com nome, descrição e preço visíveis\n    items = page.locator('[data-test=\"inventory-item\"]')\n    expect(items).to_have_count(6)\n    for i in range(6):\n        expect(items.nth(i).locator('[data-test=\"inventory-item-name\"]')).to_be_visible()\n        expect(items.nth(i).locator('[data-test=\"inventory-item-desc\"]')).to_be_visible()\n        expect(items.nth(i).locator('[data-test=\"inventory-item-price\"]')).to_be_visible()\n    # E Os produtos e preços apresentados são os seguintes: Sauce Labs Backpack $29.99; Sauce Labs Bike Light $9.99; Sauce Labs Bolt T-Shirt $15.99; Sauce Labs Fleece Jacket $49.99; Sauce Labs Onesie $7.99; Test.allTheThings() T-Shirt (Red) $15.99\n    produtos = [\n        (\"Sauce Labs Backpack\", \"$29.99\"),\n        (\"Sauce Labs Bike Light\", \"$9.99\"),\n        (\"Sauce Labs Bolt T-Shirt\", \"$15.99\"),\n        (\"Sauce Labs Fleece Jacket\", \"$49.99\"),\n        (\"Sauce Labs Onesie\", \"$7.99\"),\n        (\"Test.allTheThings() T-Shirt (Red)\", \"$15.99\"),\n    ]\n    for i, (nome, preco) in enumerate(produtos):\n        expect(items.nth(i).locator('[data-test=\"inventory-item-name\"]')).to_have_text(nome)\n        expect(items.nth(i).locator('[data-test=\"inventory-item-price\"]')).to_have_text(preco)"
+      }
+    ],
+    "assumptions": []
+  }
+}

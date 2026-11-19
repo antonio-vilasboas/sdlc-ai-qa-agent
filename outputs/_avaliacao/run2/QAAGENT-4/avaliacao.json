@@ -1,0 +1,14 @@
+{
+  "story": "QAAGENT-4",
+  "run": 2,
+  "pipeline_exit": 0,
+  "pytest": {
+    "total": 3,
+    "passed": 0,
+    "failed": {
+      "test_c01_ordenar_preco_ascendente": "AssertionError: Locator expected to have text 'Products'\nActual value: <element(s) not found> \nCall log:\nLocatorAssertions.to_have_text with timeout 5000ms\n  - waiting for locator(\"[data-test=\\\"title\\\"]\")",
+      "test_c02_ordenar_preco_descendente": "AssertionError: Locator expected to have text 'Products'\nActual value: <element(s) not found> \nCall log:\nLocatorAssertions.to_have_text with timeout 5000ms\n  - waiting for locator(\"[data-test=\\\"title\\\"]\")",
+      "test_c03_ordenar_nome_descendente": "AssertionError: Locator expected to have text 'Products'\nActual value: <element(s) not found> \nCall log:\nLocatorAssertions.to_have_text with timeout 5000ms\n  - waiting for locator(\"[data-test=\\\"title\\\"]\")"
+    }
+  }
+}
